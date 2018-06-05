@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borderlands-Save-File", "Borderlands-Save-Editor\Borderlands-Save-File.csproj", "{17E36365-D602-477E-B94A-972F5978C2BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Save-Printer", "Save-Printer\Save-Printer.csproj", "{57CB79C0-2173-4B64-A696-A222A751DB0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example Saves", "Example Saves", "{44379EF7-4DD7-4443-97BE-6C210CC42130}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Documents\my games\borderlands\savedata\save0001.sav = ..\..\..\Documents\my games\borderlands\savedata\save0001.sav
+		..\..\..\Documents\my games\borderlands\savedata\save0002.sav = ..\..\..\Documents\my games\borderlands\savedata\save0002.sav
+		..\..\..\Documents\my games\borderlands\savedata\save0003.sav = ..\..\..\Documents\my games\borderlands\savedata\save0003.sav
+		..\..\..\Documents\my games\borderlands\savedata\save0004.sav = ..\..\..\Documents\my games\borderlands\savedata\save0004.sav
+		..\..\..\Documents\my games\borderlands\savedata\Save0007.sav = ..\..\..\Documents\my games\borderlands\savedata\Save0007.sav
+		..\..\..\Documents\my games\borderlands\savedata\Save0008.sav = ..\..\..\Documents\my games\borderlands\savedata\Save0008.sav
+		..\..\..\Documents\my games\borderlands\savedata\Save0009.sav = ..\..\..\Documents\my games\borderlands\savedata\Save0009.sav
+		..\..\..\Documents\my games\borderlands\savedata\save0010.sav = ..\..\..\Documents\my games\borderlands\savedata\save0010.sav
+		SaveStructure.txt = SaveStructure.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stat-Viewer", "Stat-Viewer\Stat-Viewer.csproj", "{1139D8CA-8D93-4E3F-81F5-6D525AD521BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Files", "Other Files", "{942A8747-EE26-447D-BEC8-1854CC775F74}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17E36365-D602-477E-B94A-972F5978C2BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E36365-D602-477E-B94A-972F5978C2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E36365-D602-477E-B94A-972F5978C2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E36365-D602-477E-B94A-972F5978C2BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57CB79C0-2173-4B64-A696-A222A751DB0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57CB79C0-2173-4B64-A696-A222A751DB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57CB79C0-2173-4B64-A696-A222A751DB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57CB79C0-2173-4B64-A696-A222A751DB0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1139D8CA-8D93-4E3F-81F5-6D525AD521BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1139D8CA-8D93-4E3F-81F5-6D525AD521BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1139D8CA-8D93-4E3F-81F5-6D525AD521BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1139D8CA-8D93-4E3F-81F5-6D525AD521BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CACDB65-4EC7-4895-9262-6892D8244714}
+	EndGlobalSection
+EndGlobal

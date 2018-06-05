@@ -1,0 +1,284 @@
+﻿<Window x:Class="Stat_Viewer.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Stat_Viewer"
+		mc:Ignorable="d"
+		Title="MainWindow" Height="300" Width="1200">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="25" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<Label Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Content="Level" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<Label Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="0" Content="Level XP" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<Label Grid.Column="7" Grid.ColumnSpan="3" Grid.Row="0" Content="Total XP" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<Label Grid.Column="12" Grid.ColumnSpan="3" Grid.Row="0" Content="Playthrough 1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<Label Grid.Column="15" Grid.ColumnSpan="3" Grid.Row="0" Content="Playthrough 2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		
+		<Label Grid.Column="0" Grid.Row="1" Content="XP: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="2" Content="Pistol Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="3" Content="SMG Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="4" Content="Shotgun Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="5" Content="Combat Rifle Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="6" Content="Sniper Rifle Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="7" Content="Rocket Launcher Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Grid.Column="0" Grid.Row="8" Content="Eridian Proficiency: " VerticalAlignment="Top" HorizontalAlignment="Right"/>
+
+		<Label Grid.Column="11" Grid.Row="1" Content="Money: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="11" Grid.Row="2" Content="Missions: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="11" Grid.Row="3" Content="Logs: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="11" Grid.Row="4" Content="Challenges: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+		<Label Name="XpLevelValueLabel" Grid.Column="1" Grid.Row="1" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="XpLevelLimitLabel" Grid.Column="2" Grid.Row="1" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="1" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="XpLevelProgress" />
+			<TextBlock Text="{Binding ElementName=XpLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="XpLevelXpValueLabel" Grid.Column="4" Grid.Row="1" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="XpLevelXpLimitLabel" Grid.Column="5" Grid.Row="1" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="1" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="XpLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=XpLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="XpTotalXpValueLabel" Grid.Column="7" Grid.Row="1" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="XpTotalXpLimitLabel" Grid.Column="8" Grid.Row="1" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="1" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="XpTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=XpTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Name="PistolProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="2" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="PistolProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="2" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="2" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="PistolProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=PistolProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="PistolProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="2" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="PistolProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="2" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="2" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="PistolProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=PistolProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="PistolProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="2" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="PistolProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="2" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="2" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="PistolProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=PistolProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		
+		<Label Name="SMGProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="3" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="SMGProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="3" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="3" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="SMGProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=SMGProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="SMGProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="3" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="SMGProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="3" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="3" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="SMGProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=SMGProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="SMGProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="3" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="SMGProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="3" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="3" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="SMGProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=SMGProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Name="ShotgunProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="4" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="ShotgunProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="4" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="4" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="ShotgunProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=ShotgunProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="ShotgunProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="4" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="ShotgunProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="4" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="4" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="ShotgunProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=ShotgunProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="ShotgunProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="4" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="ShotgunProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="4" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="4" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="ShotgunProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=ShotgunProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Name="CombatRifleProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="5" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="CombatRifleProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="5" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="5" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="CombatRifleProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=CombatRifleProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="CombatRifleProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="5" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="CombatRifleProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="5" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="5" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="CombatRifleProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=CombatRifleProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="CombatRifleProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="5" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="CombatRifleProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="5" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="5" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="CombatRifleProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=CombatRifleProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Name="SniperRifleProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="6" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="SniperRifleProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="6" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="6" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="SniperRifleProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=SniperRifleProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="SniperRifleProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="6" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="SniperRifleProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="6" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="6" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="SniperRifleProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=SniperRifleProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="SniperRifleProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="6" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="SniperRifleProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="6" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="6" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="SniperRifleProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=SniperRifleProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Name="RocketLauncherProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="7" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="RocketLauncherProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="7" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="7" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="RocketLauncherProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=RocketLauncherProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="RocketLauncherProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="7" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="RocketLauncherProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="7" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="7" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="RocketLauncherProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=RocketLauncherProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="RocketLauncherProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="7" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="RocketLauncherProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="7" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="7" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="RocketLauncherProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=RocketLauncherProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Name="EridianProficiencyLevelValueLabel" Grid.Column="1" Grid.Row="8" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="EridianProficiencyLevelLimitLabel" Grid.Column="2" Grid.Row="8" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="3" Grid.Row="8" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="EridianProficiencyLevelProgress" />
+			<TextBlock Text="{Binding ElementName=EridianProficiencyLevelProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="EridianProficiencyLevelXpValueLabel" Grid.Column="4" Grid.Row="8" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="EridianProficiencyLevelXpLimitLabel" Grid.Column="5" Grid.Row="8" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="6" Grid.Row="8" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="EridianProficiencyLevelXpProgress" />
+			<TextBlock Text="{Binding ElementName=EridianProficiencyLevelXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="EridianProficiencyTotalXpValueLabel" Grid.Column="7" Grid.Row="8" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		<Label Name="EridianProficiencyTotalXpLimitLabel" Grid.Column="8" Grid.Row="8" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+		<Grid Grid.Column="9" Grid.Row="8" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="EridianProficiencyTotalXpProgress" />
+			<TextBlock Text="{Binding ElementName=EridianProficiencyTotalXpProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="1" Grid.ColumnSpan="2" Name="MoneyLabel" Content="0" VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+		<Label Grid.Column="12" Grid.Row="2" Name="MissionsCompleted1ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="2" Name="MissionsCompleted1TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="2" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="MissionsCompleted1Progress" />
+			<TextBlock Text="{Binding ElementName=MissionsCompleted1Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Grid.Column="15" Grid.Row="2" Name="MissionsCompleted2ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="16" Grid.Row="2" Name="MissionsCompleted2TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="17" Grid.Row="2" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="MissionsCompleted2Progress" />
+			<TextBlock Text="{Binding ElementName=MissionsCompleted2Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="3" Name="LogsAcquired1ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="3" Name="LogsAcquired1TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="3" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="LogsAcquired1Progress" />
+			<TextBlock Text="{Binding ElementName=LogsAcquired1Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Grid.Column="15" Grid.Row="3" Name="LogsAcquired2ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="16" Grid.Row="3" Name="LogsAcquired2TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="17" Grid.Row="3" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="LogsAcquired2Progress" />
+			<TextBlock Text="{Binding ElementName=LogsAcquired2Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="4" Name="ChallengesCompletedValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="4" Name="ChallengesCompletedTotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="4" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="ChallengesCompletedProgress" />
+			<TextBlock Text="{Binding ElementName=ChallengesCompletedProgress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="5" Name="Challenge1ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="5" Name="Challenge1TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="5" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="Challenge1Progress" />
+			<TextBlock Text="{Binding ElementName=Challenge1Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="6" Name="Challenge2ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="6" Name="Challenge2TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="6" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="Challenge2Progress" />
+			<TextBlock Text="{Binding ElementName=Challenge2Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="7" Name="Challenge3ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="7" Name="Challenge3TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="7" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="Challenge3Progress" />
+			<TextBlock Text="{Binding ElementName=Challenge3Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="12" Grid.Row="8" Name="Challenge4ValueLabel" Content="?" VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="13" Grid.Row="8" Name="Challenge4TotalLabel" Content="/?" VerticalAlignment="Top" HorizontalAlignment="Left" />
+		<Grid Grid.Column="14" Grid.Row="8" Height="Auto" Width="100">
+			<ProgressBar Minimum="0" Maximum="100" Name="Challenge4Progress" />
+			<TextBlock Text="{Binding ElementName=Challenge4Progress, Path=Value, StringFormat={}{0:0.000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+		<Label Grid.Column="11" Grid.Row="5" Name="Challenge1Label" Content="Challenge Name: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="11" Grid.Row="6" Name="Challenge2Label" Content="Challenge Name: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="11" Grid.Row="7" Name="Challenge3Label" Content="Challenge Name: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+		<Label Grid.Column="11" Grid.Row="8" Name="Challenge4Label" Content="Challenge Name: " VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+	</Grid>
+</Window>
