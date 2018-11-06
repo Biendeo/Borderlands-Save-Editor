@@ -1,4 +1,6 @@
 ﻿using Borderlands_Save_Editor;
+using Borderlands_Save_Editor.Player.Proficiency;
+using Borderlands_Save_Editor.Save;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,19 +57,18 @@ namespace Stat_Viewer {
 
 		private void UpdateLabels() {
 			const Int32 MAX_LEVEL = 69;
-			const Int32 MAX_PROFICIENCY_LEVEL = 50;
 			const Int32 NUM_MISSIONS = 216;
 			const Int32 NUM_LOGS = 188;
 			Int32 NUM_CHALLENGES = Challenge.Challenges.Count;
 
 			Dispatcher.Invoke(() => {
-				Int32 xpLevelValue = currentSave.Level;
+				Int32 xpLevelValue = currentSave.Details.Level;
 				Int32 xpLevelLimit = MAX_LEVEL;
 				double xpLevelPercentage = xpLevelValue * 100.0 / xpLevelLimit;
-				Int32 xpLevelXpValue = currentSave.Experience - Save.ExperienceToLevels[xpLevelValue];
+				Int32 xpLevelXpValue = currentSave.Details.Experience - Save.ExperienceToLevels[xpLevelValue];
 				Int32 xpLevelXpLimit = Save.ExperienceToLevels[Clamp(xpLevelValue + 1, 0, MAX_LEVEL)] - Save.ExperienceToLevels[Clamp(xpLevelValue, 0, MAX_LEVEL - 1)];
 				double xpLevelXpPercentage = xpLevelXpValue * 100.0 / xpLevelXpLimit;
-				Int32 xpTotalXpValue = currentSave.Experience;
+				Int32 xpTotalXpValue = currentSave.Details.Experience;
 				Int32 xpTotalXpLimit = Save.ExperienceToLevels[MAX_LEVEL];
 				double xpTotalXpPercentage = xpTotalXpValue * 100.0 / xpTotalXpLimit;
 				XpLevelValueLabel.Content = $"{xpLevelValue}";
@@ -80,14 +81,15 @@ namespace Stat_Viewer {
 				XpTotalXpLimitLabel.Content = $"/{xpTotalXpLimit}";
 				XpTotalXpProgress.Value = xpTotalXpPercentage;
 
-				Int32 pistolProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.Pistol].Level;
-				Int32 pistolProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var pistolProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.Pistol);
+				UInt32 pistolProficiencyLevelValue = pistolProficiency.Level;
+				UInt32 pistolProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double pistolProficiencyLevelPercentage = pistolProficiencyLevelValue * 100.0 / pistolProficiencyLevelLimit;
-				Int32 pistolProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.Pistol].Points;
-				Int32 pistolProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(pistolProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(pistolProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 pistolProficiencyLevelXpValue = pistolProficiency.Points;
+				Int32 pistolProficiencyLevelXpLimit = pistolProficiency.PointsForCurrentLevel;
 				double pistolProficiencyLevelXpPercentage = pistolProficiencyLevelXpValue * 100.0 / pistolProficiencyLevelXpLimit;
-				Int32 pistolProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.Pistol].Points + Proficiency.PointsToLevel[pistolProficiencyLevelValue];
-				Int32 pistolProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 pistolProficiencyTotalXpValue = pistolProficiency.TotalPoints;
+				Int32 pistolProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double pistolProficiencyTotalXpPercentage = pistolProficiencyTotalXpValue * 100.0 / pistolProficiencyTotalXpLimit;
 				PistolProficiencyLevelValueLabel.Content = $"{pistolProficiencyLevelValue}";
 				PistolProficiencyLevelLimitLabel.Content = $"/{pistolProficiencyLevelLimit}";
@@ -99,14 +101,15 @@ namespace Stat_Viewer {
 				PistolProficiencyTotalXpLimitLabel.Content = $"/{pistolProficiencyTotalXpLimit}";
 				PistolProficiencyTotalXpProgress.Value = pistolProficiencyTotalXpPercentage;
 
-				Int32 smgProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.SMG].Level;
-				Int32 smgProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var smgProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.SMG);
+				UInt32 smgProficiencyLevelValue = smgProficiency.Level;
+				UInt32 smgProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double smgProficiencyLevelPercentage = smgProficiencyLevelValue * 100.0 / smgProficiencyLevelLimit;
-				Int32 smgProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.SMG].Points;
-				Int32 smgProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(smgProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(smgProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 smgProficiencyLevelXpValue = smgProficiency.Points;
+				Int32 smgProficiencyLevelXpLimit = smgProficiency.PointsForCurrentLevel;
 				double smgProficiencyLevelXpPercentage = smgProficiencyLevelXpValue * 100.0 / smgProficiencyLevelXpLimit;
-				Int32 smgProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.SMG].Points + Proficiency.PointsToLevel[smgProficiencyLevelValue];
-				Int32 smgProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 smgProficiencyTotalXpValue = smgProficiency.TotalPoints;
+				Int32 smgProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double smgProficiencyTotalXpPercentage = smgProficiencyTotalXpValue * 100.0 / smgProficiencyTotalXpLimit;
 				SMGProficiencyLevelValueLabel.Content = $"{smgProficiencyLevelValue}";
 				SMGProficiencyLevelLimitLabel.Content = $"/{smgProficiencyLevelLimit}";
@@ -118,14 +121,15 @@ namespace Stat_Viewer {
 				SMGProficiencyTotalXpLimitLabel.Content = $"/{smgProficiencyTotalXpLimit}";
 				SMGProficiencyTotalXpProgress.Value = smgProficiencyTotalXpPercentage;
 
-				Int32 shotgunProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.Shotgun].Level;
-				Int32 shotgunProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var shotgunProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.Shotgun);
+				UInt32 shotgunProficiencyLevelValue = shotgunProficiency.Level;
+				UInt32 shotgunProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double shotgunProficiencyLevelPercentage = shotgunProficiencyLevelValue * 100.0 / shotgunProficiencyLevelLimit;
-				Int32 shotgunProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.Shotgun].Points;
-				Int32 shotgunProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(shotgunProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(shotgunProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 shotgunProficiencyLevelXpValue = shotgunProficiency.Points;
+				Int32 shotgunProficiencyLevelXpLimit = shotgunProficiency.PointsForCurrentLevel;
 				double shotgunProficiencyLevelXpPercentage = shotgunProficiencyLevelXpValue * 100.0 / shotgunProficiencyLevelXpLimit;
-				Int32 shotgunProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.Shotgun].Points + Proficiency.PointsToLevel[shotgunProficiencyLevelValue];
-				Int32 shotgunProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 shotgunProficiencyTotalXpValue = shotgunProficiency.TotalPoints;
+				Int32 shotgunProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double shotgunProficiencyTotalXpPercentage = shotgunProficiencyTotalXpValue * 100.0 / shotgunProficiencyTotalXpLimit;
 				ShotgunProficiencyLevelValueLabel.Content = $"{shotgunProficiencyLevelValue}";
 				ShotgunProficiencyLevelLimitLabel.Content = $"/{shotgunProficiencyLevelLimit}";
@@ -137,14 +141,15 @@ namespace Stat_Viewer {
 				ShotgunProficiencyTotalXpLimitLabel.Content = $"/{shotgunProficiencyTotalXpLimit}";
 				ShotgunProficiencyTotalXpProgress.Value = shotgunProficiencyTotalXpPercentage;
 
-				Int32 combatRifleProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.CombatRifle].Level;
-				Int32 combatRifleProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var combatRifleProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.CombatRifle);
+				UInt32 combatRifleProficiencyLevelValue = combatRifleProficiency.Level;
+				UInt32 combatRifleProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double combatRifleProficiencyLevelPercentage = combatRifleProficiencyLevelValue * 100.0 / combatRifleProficiencyLevelLimit;
-				Int32 combatRifleProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.CombatRifle].Points;
-				Int32 combatRifleProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(combatRifleProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(combatRifleProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 combatRifleProficiencyLevelXpValue = combatRifleProficiency.Points;
+				Int32 combatRifleProficiencyLevelXpLimit = combatRifleProficiency.PointsForCurrentLevel;
 				double combatRifleProficiencyLevelXpPercentage = combatRifleProficiencyLevelXpValue * 100.0 / combatRifleProficiencyLevelXpLimit;
-				Int32 combatRifleProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.CombatRifle].Points + Proficiency.PointsToLevel[combatRifleProficiencyLevelValue];
-				Int32 combatRifleProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 combatRifleProficiencyTotalXpValue = combatRifleProficiency.TotalPoints;
+				Int32 combatRifleProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double combatRifleProficiencyTotalXpPercentage = combatRifleProficiencyTotalXpValue * 100.0 / combatRifleProficiencyTotalXpLimit;
 				CombatRifleProficiencyLevelValueLabel.Content = $"{combatRifleProficiencyLevelValue}";
 				CombatRifleProficiencyLevelLimitLabel.Content = $"/{combatRifleProficiencyLevelLimit}";
@@ -156,14 +161,15 @@ namespace Stat_Viewer {
 				CombatRifleProficiencyTotalXpLimitLabel.Content = $"/{combatRifleProficiencyTotalXpLimit}";
 				CombatRifleProficiencyTotalXpProgress.Value = combatRifleProficiencyTotalXpPercentage;
 
-				Int32 sniperRifleProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.SniperRifle].Level;
-				Int32 sniperRifleProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var sniperRifleProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.SniperRifle);
+				UInt32 sniperRifleProficiencyLevelValue = sniperRifleProficiency.Level;
+				UInt32 sniperRifleProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double sniperRifleProficiencyLevelPercentage = sniperRifleProficiencyLevelValue * 100.0 / sniperRifleProficiencyLevelLimit;
-				Int32 sniperRifleProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.SniperRifle].Points;
-				Int32 sniperRifleProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(sniperRifleProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(sniperRifleProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 sniperRifleProficiencyLevelXpValue = sniperRifleProficiency.Points;
+				Int32 sniperRifleProficiencyLevelXpLimit = sniperRifleProficiency.PointsForCurrentLevel;
 				double sniperRifleProficiencyLevelXpPercentage = sniperRifleProficiencyLevelXpValue * 100.0 / sniperRifleProficiencyLevelXpLimit;
-				Int32 sniperRifleProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.SniperRifle].Points + Proficiency.PointsToLevel[sniperRifleProficiencyLevelValue];
-				Int32 sniperRifleProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 sniperRifleProficiencyTotalXpValue = sniperRifleProficiency.TotalPoints;
+				Int32 sniperRifleProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double sniperRifleProficiencyTotalXpPercentage = sniperRifleProficiencyTotalXpValue * 100.0 / sniperRifleProficiencyTotalXpLimit;
 				SniperRifleProficiencyLevelValueLabel.Content = $"{sniperRifleProficiencyLevelValue}";
 				SniperRifleProficiencyLevelLimitLabel.Content = $"/{sniperRifleProficiencyLevelLimit}";
@@ -175,14 +181,15 @@ namespace Stat_Viewer {
 				SniperRifleProficiencyTotalXpLimitLabel.Content = $"/{sniperRifleProficiencyTotalXpLimit}";
 				SniperRifleProficiencyTotalXpProgress.Value = sniperRifleProficiencyTotalXpPercentage;
 
-				Int32 rocketLauncherProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.RocketLauncher].Level;
-				Int32 rocketLauncherProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var rocketLauncherProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.RocketLauncher);
+				UInt32 rocketLauncherProficiencyLevelValue = rocketLauncherProficiency.Level;
+				UInt32 rocketLauncherProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double rocketLauncherProficiencyLevelPercentage = rocketLauncherProficiencyLevelValue * 100.0 / rocketLauncherProficiencyLevelLimit;
-				Int32 rocketLauncherProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.RocketLauncher].Points;
-				Int32 rocketLauncherProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(rocketLauncherProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(rocketLauncherProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 rocketLauncherProficiencyLevelXpValue = rocketLauncherProficiency.Points;
+				Int32 rocketLauncherProficiencyLevelXpLimit = rocketLauncherProficiency.PointsForCurrentLevel;
 				double rocketLauncherProficiencyLevelXpPercentage = rocketLauncherProficiencyLevelXpValue * 100.0 / rocketLauncherProficiencyLevelXpLimit;
-				Int32 rocketLauncherProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.RocketLauncher].Points + Proficiency.PointsToLevel[rocketLauncherProficiencyLevelValue];
-				Int32 rocketLauncherProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 rocketLauncherProficiencyTotalXpValue = rocketLauncherProficiency.TotalPoints;
+				Int32 rocketLauncherProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double rocketLauncherProficiencyTotalXpPercentage = rocketLauncherProficiencyTotalXpValue * 100.0 / rocketLauncherProficiencyTotalXpLimit;
 				RocketLauncherProficiencyLevelValueLabel.Content = $"{rocketLauncherProficiencyLevelValue}";
 				RocketLauncherProficiencyLevelLimitLabel.Content = $"/{rocketLauncherProficiencyLevelLimit}";
@@ -194,14 +201,15 @@ namespace Stat_Viewer {
 				RocketLauncherProficiencyTotalXpLimitLabel.Content = $"/{rocketLauncherProficiencyTotalXpLimit}";
 				RocketLauncherProficiencyTotalXpProgress.Value = rocketLauncherProficiencyTotalXpPercentage;
 
-				Int32 eridianProficiencyLevelValue = currentSave.Proficiencies[ProficiencyType.Eridian].Level;
-				Int32 eridianProficiencyLevelLimit = MAX_PROFICIENCY_LEVEL;
+				var eridianProficiency = currentSave.Proficiencies.GetProficiency(ProficiencyType.Eridian);
+				UInt32 eridianProficiencyLevelValue = eridianProficiency.Level;
+				UInt32 eridianProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double eridianProficiencyLevelPercentage = eridianProficiencyLevelValue * 100.0 / eridianProficiencyLevelLimit;
-				Int32 eridianProficiencyLevelXpValue = currentSave.Proficiencies[ProficiencyType.Eridian].Points;
-				Int32 eridianProficiencyLevelXpLimit = Proficiency.PointsToLevel[Clamp(eridianProficiencyLevelValue + 1, 0, MAX_PROFICIENCY_LEVEL)] - Proficiency.PointsToLevel[Clamp(eridianProficiencyLevelValue, 0, MAX_PROFICIENCY_LEVEL - 1)];
+				Int32 eridianProficiencyLevelXpValue = eridianProficiency.Points;
+				Int32 eridianProficiencyLevelXpLimit = eridianProficiency.PointsForCurrentLevel;
 				double eridianProficiencyLevelXpPercentage = eridianProficiencyLevelXpValue * 100.0 / eridianProficiencyLevelXpLimit;
-				Int32 eridianProficiencyTotalXpValue = currentSave.Proficiencies[ProficiencyType.Eridian].Points + Proficiency.PointsToLevel[eridianProficiencyLevelValue];
-				Int32 eridianProficiencyTotalXpLimit = Proficiency.PointsToLevel[MAX_PROFICIENCY_LEVEL];
+				Int32 eridianProficiencyTotalXpValue = eridianProficiency.TotalPoints;
+				Int32 eridianProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
 				double eridianProficiencyTotalXpPercentage = eridianProficiencyTotalXpValue * 100.0 / eridianProficiencyTotalXpLimit;
 				EridianProficiencyLevelValueLabel.Content = $"{eridianProficiencyLevelValue}";
 				EridianProficiencyLevelLimitLabel.Content = $"/{eridianProficiencyLevelLimit}";
@@ -213,7 +221,7 @@ namespace Stat_Viewer {
 				EridianProficiencyTotalXpLimitLabel.Content = $"/{eridianProficiencyTotalXpLimit}";
 				EridianProficiencyTotalXpProgress.Value = eridianProficiencyTotalXpPercentage;
 
-				MoneyLabel.Content = $"{currentSave.Money}";
+				MoneyLabel.Content = $"${currentSave.Details.Money}";
 
 				Int32 missionsCompleted1Value = 0;
 				Int32 missionsCompleted2Value = 0;

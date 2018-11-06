@@ -5,7 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borderlands_Save_Editor {
+	/// <summary>
+	/// Identifies a stat type.
+	/// </summary>
 	public enum StatID {
+		// I'm lazy.
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 		ShotsFired,
 		Kills,
 		SkagKills,
@@ -36,16 +41,42 @@ namespace Borderlands_Save_Editor {
 		ActionSkillKills,
 		ChainKills,
 		DuelsWon //? I don't know the ID of this one.
-		//? Maybe chuck dummy stats to bind the rest?
+				 //? Maybe chuck dummy stats to bind the rest?
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 	}
 
+	/// <summary>
+	/// Stores all the properties of a stat.
+	/// </summary>
 	public class Stat {
+		/// <summary>
+		/// The stat ID used by the save format.
+		/// </summary>
 		public Byte ID;
+
+		/// <summary>
+		/// The <see cref="StatID"/> of this stat.
+		/// </summary>
 		public StatID StatID { get { return StatDefinitions[ID]; } }
-		public Byte UnknownVariable1; //? Always 6?
-		public Byte UnknownVariable2; //? Always 1?
+
+		/// <summary>
+		/// An unknown variable. It seems to always be 6.
+		/// </summary>
+		public Byte UnknownVariable1;
+
+		/// <summary>
+		/// An unknown variable. It seems to always be 1.
+		/// </summary>
+		public Byte UnknownVariable2;
+
+		/// <summary>
+		/// The current value of this stat.
+		/// </summary>
 		public UInt32 Value;
 
+		/// <summary>
+		/// Maps the number associated with a stat with a <see cref="StatID"/>.
+		/// </summary>
 		public static readonly Dictionary<Byte, StatID> StatDefinitions = new Dictionary<Byte, StatID> {
 			{ 85, StatID.ShotsFired },
 			{ 95, StatID.Kills },

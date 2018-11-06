@@ -5,27 +5,67 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borderlands_Save_Editor {
+	/// <summary>
+	/// Describes a challenge that is tracked in-game.
+	/// </summary>
 	public class Challenge {
+		/// <summary>
+		/// The name of the challenge.
+		/// </summary>
 		public string Name;
+
+		/// <summary>
+		/// A list of all the trasks that must be achieved in order to complete this challenge.
+		/// This is only necessary for the "12 Days of Pandora" challenge, as every other challenge
+		/// only follows on stat.
+		/// </summary>
 		public List<ChallengeGoal> Goals;
+
+		/// <summary>
+		/// The amount of experience rewarded for completing the challenge.
+		/// </summary>
 		public Int32 XpReward;
 
+		/// <summary>
+		/// Constructs a <see cref="Challenge"/> with the given properties.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="goals"></param>
+		/// <param name="xpReward"></param>
 		public Challenge(string name, List<ChallengeGoal> goals, Int32 xpReward) {
 			Name = name;
 			Goals = goals;
 			XpReward = xpReward;
 		}
 
+		/// <summary>
+		/// A single goal of a challenge.
+		/// </summary>
 		public struct ChallengeGoal {
+			/// <summary>
+			/// The stat that is being tracked. Conveniently no challenges use anything but stats.
+			/// </summary>
 			public StatID Stat;
+
+			/// <summary>
+			/// The value that the stat must reach.
+			/// </summary>
 			public Int32 Count;
 
+			/// <summary>
+			/// Constructs a goal using th stat and the given value.
+			/// </summary>
+			/// <param name="stat"></param>
+			/// <param name="count"></param>
 			public ChallengeGoal(StatID stat, Int32 count) {
 				Stat = stat;
 				Count = count;
 			}
 		}
 
+		/// <summary>
+		/// A list of all the challenges in the game.
+		/// </summary>
 		public static readonly List<Challenge> Challenges = new List<Challenge> {
 			new Challenge("12 Days of Pandora", new List<ChallengeGoal> {
 				new ChallengeGoal(StatID.CombatRifleKills, 12),

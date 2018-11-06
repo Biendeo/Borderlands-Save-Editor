@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DocumentationFile>bin\Debug\Borderlands-Save-Editor.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DocumentationFile>bin\Release\Borderlands-Save-Editor.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -40,22 +44,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AmmoPool.cs" />
-    <Compile Include="Challenge.cs" />
-    <Compile Include="CharacterClass.cs" />
-    <Compile Include="Echo.cs" />
-    <Compile Include="EchoPlaythrough.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Mission.cs" />
-    <Compile Include="Playthrough.cs" />
-    <Compile Include="Proficiency.cs" />
-    <Compile Include="Save.cs" />
+    <Compile Include="src\AmmoPool.cs" />
+    <Compile Include="src\Challenge.cs" />
+    <Compile Include="src\Player\Class\CharacterDetails.cs" />
+    <Compile Include="src\Echo.cs" />
+    <Compile Include="src\EchoPlaythrough.cs" />
+    <Compile Include="src\Extensions.cs" />
+    <Compile Include="src\Item.cs" />
+    <Compile Include="src\Mission.cs" />
+    <Compile Include="src\Player\Class\CharacterClassType.cs" />
+    <Compile Include="src\Player\Proficiency\CharacterProficiencies.cs" />
+    <Compile Include="src\Player\Skill\CharacterSkills.cs" />
+    <Compile Include="src\Player\Proficiency\ProficiencyType.cs" />
+    <Compile Include="src\Player\Skill\SkillType.cs" />
+    <Compile Include="src\Playthrough.cs" />
+    <Compile Include="src\Player\Proficiency\Proficiency.cs" />
+    <Compile Include="src\Save\Save.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skill.cs" />
-    <Compile Include="Stat.cs" />
-    <Compile Include="StatsTable.cs" />
-    <Compile Include="Weapon.cs" />
+    <Compile Include="src\Player\Skill\Skill.cs" />
+    <Compile Include="src\Stat.cs" />
+    <Compile Include="src\StatsTable.cs" />
+    <Compile Include="src\Weapon.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Mission\" />
+    <Folder Include="src\Player\Inventory\Ammo\" />
+    <Folder Include="src\Player\Inventory\Item\" />
+    <Folder Include="src\Player\Inventory\Weapon\" />
+    <Folder Include="src\Player\Stat\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
