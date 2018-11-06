@@ -49,18 +49,16 @@ namespace Borderlands_Save_Editor {
 	public class AmmoPool {
 		/// <summary>
 		/// The internal name of the ammo in this pool used by a save file.
-		/// 
-		/// TODO: Migrate this towards the <see cref="Type"/> field.
 		/// </summary>
-		public string InternalName;
+		public string InternalName {
+			get { return AmmoDefinitions.FirstOrDefault(x => x.Value == Type).Key; }
+			set { Type = AmmoDefinitions[value]; }
+		}
 
 		/// <summary>
 		/// The ammo type used by this pool.
 		/// </summary>
-		public AmmoType Type {
-			get { return AmmoDefinitions[InternalName]; }
-			set { InternalName = AmmoDefinitions.FirstOrDefault(x => x.Value == value).Key; }
-		}
+		public AmmoType Type;
 
 		/// <summary>
 		/// The internal name of the pool itself used by the save file.
