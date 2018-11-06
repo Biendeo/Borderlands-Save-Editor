@@ -27,7 +27,6 @@ namespace Borderlands_Save_Editor.Save {
 			}
 			Items = new List<Item>();
 			Weapons = new List<Weapon>();
-			StatsBuffer = new byte[0];
 			Stats = new Dictionary<StatID, Stat>();
 			StatTable = new StatsTable();
 			LocationsVisited = new List<string>();
@@ -150,18 +149,18 @@ namespace Borderlands_Save_Editor.Save {
 
 			// Some stats?
 			Int32 statLength = reader.ReadInt32();
-			save.StatsBuffer = reader.ReadBytes(statLength);
-			save.StatTable.UnknownVariable1 = BitConverter.ToInt32(save.StatsBuffer, 0);
-			save.StatTable.TotalBytesSize = BitConverter.ToInt32(save.StatsBuffer, 4);
-			save.StatTable.TotalEntries = BitConverter.ToInt16(save.StatsBuffer, 8);
+			byte[] statsBuffer = reader.ReadBytes(statLength);
+			save.StatTable.UnknownVariable1 = BitConverter.ToInt32(statsBuffer, 0);
+			save.StatTable.TotalBytesSize = BitConverter.ToInt32(statsBuffer, 4);
+			save.StatTable.TotalEntries = BitConverter.ToInt16(statsBuffer, 8);
 
 			for (Int16 x = 0; x < save.StatTable.TotalEntries; ++x) {
 				Stat stat = new Stat();
 				save.StatTable.Stats.Add(stat);
-				stat.ID = save.StatsBuffer[10 + 7 * x];
-				stat.UnknownVariable1 = save.StatsBuffer[11 + 7 * x];
-				stat.UnknownVariable2 = save.StatsBuffer[12 + 7 * x];
-				stat.Value = BitConverter.ToUInt32(save.StatsBuffer, 13 + 7 * x);
+				stat.ID = statsBuffer[10 + 7 * x];
+				stat.UnknownVariable1 = statsBuffer[11 + 7 * x];
+				stat.UnknownVariable2 = statsBuffer[12 + 7 * x];
+				stat.Value = BitConverter.ToUInt32(statsBuffer, 13 + 7 * x);
 				if (Stat.StatDefinitions.ContainsKey(stat.ID)) {
 					save.Stats.Add(Stat.StatDefinitions[stat.ID], stat);
 				}
@@ -431,7 +430,7 @@ namespace Borderlands_Save_Editor.Save {
 			}
 
 			// Stats.
-			WriteInt32(writer, StatsBuffer.Length);
+			WriteInt32(writer, 10 + StatTable.Stats.Count * 7);
 			WriteInt32(writer, StatTable.UnknownVariable1);
 			WriteInt32(writer, StatTable.TotalBytesSize);
 			writer.Write(StatTable.TotalEntries);
@@ -599,12 +598,6 @@ namespace Borderlands_Save_Editor.Save {
 		/// A list of this character's weapons.
 		/// </summary>
 		public List<Weapon> Weapons;
-
-		/// <summary>
-		/// A buffer of all the bytes used by this player's stats.
-		/// </summary>
-		[Obsolete("The read/write should work properly, so this doesn't need to be stored.")]
-		public byte[] StatsBuffer;
 
 		/// <summary>
 		/// All of the stats that are tracked by this character.
