@@ -86,7 +86,7 @@ namespace Stat_Viewer {
 				UInt32 pistolProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double pistolProficiencyLevelPercentage = pistolProficiencyLevelValue * 100.0 / pistolProficiencyLevelLimit;
 				Int32 pistolProficiencyLevelXpValue = pistolProficiency.Points;
-				Int32 pistolProficiencyLevelXpLimit = pistolProficiency.PointsForCurrentLevel;
+				Int32 pistolProficiencyLevelXpLimit = pistolProficiency.PointsForNextLevel;
 				double pistolProficiencyLevelXpPercentage = pistolProficiencyLevelXpValue * 100.0 / pistolProficiencyLevelXpLimit;
 				Int32 pistolProficiencyTotalXpValue = pistolProficiency.TotalPoints;
 				Int32 pistolProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
@@ -106,7 +106,7 @@ namespace Stat_Viewer {
 				UInt32 smgProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double smgProficiencyLevelPercentage = smgProficiencyLevelValue * 100.0 / smgProficiencyLevelLimit;
 				Int32 smgProficiencyLevelXpValue = smgProficiency.Points;
-				Int32 smgProficiencyLevelXpLimit = smgProficiency.PointsForCurrentLevel;
+				Int32 smgProficiencyLevelXpLimit = smgProficiency.PointsForNextLevel;
 				double smgProficiencyLevelXpPercentage = smgProficiencyLevelXpValue * 100.0 / smgProficiencyLevelXpLimit;
 				Int32 smgProficiencyTotalXpValue = smgProficiency.TotalPoints;
 				Int32 smgProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
@@ -126,7 +126,7 @@ namespace Stat_Viewer {
 				UInt32 shotgunProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double shotgunProficiencyLevelPercentage = shotgunProficiencyLevelValue * 100.0 / shotgunProficiencyLevelLimit;
 				Int32 shotgunProficiencyLevelXpValue = shotgunProficiency.Points;
-				Int32 shotgunProficiencyLevelXpLimit = shotgunProficiency.PointsForCurrentLevel;
+				Int32 shotgunProficiencyLevelXpLimit = shotgunProficiency.PointsForNextLevel;
 				double shotgunProficiencyLevelXpPercentage = shotgunProficiencyLevelXpValue * 100.0 / shotgunProficiencyLevelXpLimit;
 				Int32 shotgunProficiencyTotalXpValue = shotgunProficiency.TotalPoints;
 				Int32 shotgunProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
@@ -146,7 +146,7 @@ namespace Stat_Viewer {
 				UInt32 combatRifleProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double combatRifleProficiencyLevelPercentage = combatRifleProficiencyLevelValue * 100.0 / combatRifleProficiencyLevelLimit;
 				Int32 combatRifleProficiencyLevelXpValue = combatRifleProficiency.Points;
-				Int32 combatRifleProficiencyLevelXpLimit = combatRifleProficiency.PointsForCurrentLevel;
+				Int32 combatRifleProficiencyLevelXpLimit = combatRifleProficiency.PointsForNextLevel;
 				double combatRifleProficiencyLevelXpPercentage = combatRifleProficiencyLevelXpValue * 100.0 / combatRifleProficiencyLevelXpLimit;
 				Int32 combatRifleProficiencyTotalXpValue = combatRifleProficiency.TotalPoints;
 				Int32 combatRifleProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
@@ -166,7 +166,7 @@ namespace Stat_Viewer {
 				UInt32 sniperRifleProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double sniperRifleProficiencyLevelPercentage = sniperRifleProficiencyLevelValue * 100.0 / sniperRifleProficiencyLevelLimit;
 				Int32 sniperRifleProficiencyLevelXpValue = sniperRifleProficiency.Points;
-				Int32 sniperRifleProficiencyLevelXpLimit = sniperRifleProficiency.PointsForCurrentLevel;
+				Int32 sniperRifleProficiencyLevelXpLimit = sniperRifleProficiency.PointsForNextLevel;
 				double sniperRifleProficiencyLevelXpPercentage = sniperRifleProficiencyLevelXpValue * 100.0 / sniperRifleProficiencyLevelXpLimit;
 				Int32 sniperRifleProficiencyTotalXpValue = sniperRifleProficiency.TotalPoints;
 				Int32 sniperRifleProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
@@ -186,7 +186,7 @@ namespace Stat_Viewer {
 				UInt32 rocketLauncherProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double rocketLauncherProficiencyLevelPercentage = rocketLauncherProficiencyLevelValue * 100.0 / rocketLauncherProficiencyLevelLimit;
 				Int32 rocketLauncherProficiencyLevelXpValue = rocketLauncherProficiency.Points;
-				Int32 rocketLauncherProficiencyLevelXpLimit = rocketLauncherProficiency.PointsForCurrentLevel;
+				Int32 rocketLauncherProficiencyLevelXpLimit = rocketLauncherProficiency.PointsForNextLevel;
 				double rocketLauncherProficiencyLevelXpPercentage = rocketLauncherProficiencyLevelXpValue * 100.0 / rocketLauncherProficiencyLevelXpLimit;
 				Int32 rocketLauncherProficiencyTotalXpValue = rocketLauncherProficiency.TotalPoints;
 				Int32 rocketLauncherProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;
@@ -206,7 +206,7 @@ namespace Stat_Viewer {
 				UInt32 eridianProficiencyLevelLimit = Proficiency.MaximumLevel;
 				double eridianProficiencyLevelPercentage = eridianProficiencyLevelValue * 100.0 / eridianProficiencyLevelLimit;
 				Int32 eridianProficiencyLevelXpValue = eridianProficiency.Points;
-				Int32 eridianProficiencyLevelXpLimit = eridianProficiency.PointsForCurrentLevel;
+				Int32 eridianProficiencyLevelXpLimit = eridianProficiency.PointsForNextLevel;
 				double eridianProficiencyLevelXpPercentage = eridianProficiencyLevelXpValue * 100.0 / eridianProficiencyLevelXpLimit;
 				Int32 eridianProficiencyTotalXpValue = eridianProficiency.TotalPoints;
 				Int32 eridianProficiencyTotalXpLimit = Proficiency.TotalPointsForMaximumLevel;

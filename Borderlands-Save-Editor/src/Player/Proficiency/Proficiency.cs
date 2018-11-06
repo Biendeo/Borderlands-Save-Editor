@@ -106,13 +106,13 @@ namespace Borderlands_Save_Editor.Player.Proficiency {
 		/// The number of points required for the current level of this proficiency. Shortcuts the
 		/// argument for <see cref="PointsToLevel(uint)"/>.
 		/// </summary>
-		public Int32 PointsForCurrentLevel { get { return PointsToLevel(Level); } }
+		public Int32 PointsForNextLevel { get { return PointsToLevel(Level + 1); } }
 
 		/// <summary>
 		/// The total number of points required for the current level of this proficiency. Shortcuts
 		/// the argument for <see cref="TotalPointsToLevel(uint)"/>.
 		/// </summary>
-		public Int32 TotalPointsForCurrentLevel { get { return TotalPointsToLevel(Level); } }
+		public Int32 TotalPointsForNextLevel { get { return TotalPointsToLevel(Level + 1); } }
 		
 		/// <summary>
 		/// The total number of experience points required for the maximum level of this
