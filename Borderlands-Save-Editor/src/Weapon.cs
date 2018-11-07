@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,6 +108,30 @@ namespace Borderlands_Save_Editor {
 	/// Stores all the properties of the weapon.
 	/// </summary>
 	public class Weapon {
+		/// <summary>
+		/// Constructs a weapon from a save file reader at the correct position.
+		/// </summary>
+		/// <param name="reader"></param>
+		public Weapon(BinaryReader reader) {
+			InternalWeaponCategory = reader.BL_ReadString();
+			InternalWeaponManufacturer = reader.BL_ReadString();
+			InternalWeaponType = reader.BL_ReadString();
+			InternalWeaponBody = reader.BL_ReadString();
+			InternalWeaponGrip = reader.BL_ReadString();
+			InternalWeaponMag = reader.BL_ReadString();
+			InternalWeaponBarrel = reader.BL_ReadString();
+			InternalWeaponSight = reader.BL_ReadString();
+			InternalWeaponStock = reader.BL_ReadString();
+			InternalWeaponAction = reader.BL_ReadString();
+			InternalWeaponAccessory = reader.BL_ReadString();
+			InternalWeaponMaterial = reader.BL_ReadString();
+			InternalWeaponPrefix = reader.BL_ReadString();
+			InternalWeaponTitle = reader.BL_ReadString();
+			UnknownVariable1 = reader.ReadInt32();
+			UnknownVariable2 = reader.ReadInt32();
+			EquippedSlot = reader.ReadInt32();
+		}
+
 		/// <summary>
 		/// The internal string used by the save file for this weapon's category.
 		/// </summary>

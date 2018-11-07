@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,27 @@ namespace Borderlands_Save_Editor {
 	/// Stores all the stats for a character.
 	/// </summary>
 	public class StatsTable {
+		/// <summary>
+		/// Reads in the stats table from a save file with the reader at the correct position.
+		/// </summary>
+		/// <param name="reader"></param>
+		public void ReadStats(BinaryReader reader) {
+			Int32 statsLength = reader.ReadInt32();
+			byte[] statsBuffer = reader.ReadBytes(statsLength);
+			var statsStream = new MemoryStream(statsBuffer);
+			var statsReader = new BinaryReader(statsStream);
+
+			UnknownVariable1 = statsReader.ReadInt32();
+			TotalBytesSize = statsReader.ReadInt32();
+			TotalEntries = statsReader.ReadInt16();
+
+			Stats.Clear();
+			for (Int16 x = 0; x < TotalEntries; ++x) {
+				var stat = new Stat(statsReader);
+				Stats.Add(stat.ID, stat);
+			}
+		}
+		
 		/// <summary>
 		/// An unknown variable.
 		/// </summary>
@@ -27,15 +49,22 @@ namespace Borderlands_Save_Editor {
 		public Int16 TotalEntries;
 
 		/// <summary>
-		/// A list of all the stats (should it be a map?).
+		/// All the stats in the game.
 		/// </summary>
-		public List<Stat> Stats;
+		public Dictionary<Byte, Stat> Stats;
 
 		/// <summary>
 		/// Constructs an empty stat table.
 		/// </summary>
 		public StatsTable() {
-			Stats = new List<Stat>();
+			Stats = new Dictionary<Byte, Stat>();
+			/*
+			foreach (StatID id in Enum.GetValues(typeof(StatID))) {
+				Stats.Add(id, new Stat {
+					StatID = id
+				});
+			}
+			*/
 		}
 	}
 }

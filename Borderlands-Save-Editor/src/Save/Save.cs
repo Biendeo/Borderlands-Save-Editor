@@ -27,7 +27,6 @@ namespace Borderlands_Save_Editor.Save {
 			}
 			Items = new List<Item>();
 			Weapons = new List<Weapon>();
-			Stats = new Dictionary<StatID, Stat>();
 			StatTable = new StatsTable();
 			LocationsVisited = new List<string>();
 			CurrentLocation = "?";
@@ -103,20 +102,7 @@ namespace Borderlands_Save_Editor.Save {
 			// Now the items.
 			Int32 itemCount = reader.ReadInt32();
 			for (Int32 x = 0; x < itemCount; ++x) {
-				Item item = new Item();
-				save.Items.Add(item);
-				item.InternalItemCategory = reader.BL_ReadString();
-				item.InternalItemType = reader.BL_ReadString();
-				item.InternalItemBody = reader.BL_ReadString();
-				item.InternalItemLeft = reader.BL_ReadString();
-				item.InternalItemRight = reader.BL_ReadString();
-				item.InternalItemMaterial = reader.BL_ReadString();
-				item.InternalItemManufacturer = reader.BL_ReadString();
-				item.InternalItemPrefix = reader.BL_ReadString();
-				item.InternalItemTitle = reader.BL_ReadString();
-				item.UnknownVariable1 = reader.ReadInt32();
-				item.UnknownVariable2 = reader.ReadInt32();
-				item.Equipped = reader.ReadInt32();
+				save.Items.Add(new Item(reader));
 			}
 
 			// Some slot counters.
@@ -126,45 +112,11 @@ namespace Borderlands_Save_Editor.Save {
 			// Now the weapons.
 			Int32 weaponCount = reader.ReadInt32();
 			for (Int32 x = 0; x < weaponCount; ++x) {
-				Weapon weapon = new Weapon();
-				save.Weapons.Add(weapon);
-				weapon.InternalWeaponCategory = reader.BL_ReadString();
-				weapon.InternalWeaponManufacturer = reader.BL_ReadString();
-				weapon.InternalWeaponType = reader.BL_ReadString();
-				weapon.InternalWeaponBody = reader.BL_ReadString();
-				weapon.InternalWeaponGrip = reader.BL_ReadString();
-				weapon.InternalWeaponMag = reader.BL_ReadString();
-				weapon.InternalWeaponBarrel = reader.BL_ReadString();
-				weapon.InternalWeaponSight = reader.BL_ReadString();
-				weapon.InternalWeaponStock = reader.BL_ReadString();
-				weapon.InternalWeaponAction = reader.BL_ReadString();
-				weapon.InternalWeaponAccessory = reader.BL_ReadString();
-				weapon.InternalWeaponMaterial = reader.BL_ReadString();
-				weapon.InternalWeaponPrefix = reader.BL_ReadString();
-				weapon.InternalWeaponTitle = reader.BL_ReadString();
-				weapon.UnknownVariable1 = reader.ReadInt32();
-				weapon.UnknownVariable2 = reader.ReadInt32();
-				weapon.EquippedSlot = reader.ReadInt32();
+				save.Weapons.Add(new Weapon(reader));
 			}
 
 			// Some stats?
-			Int32 statLength = reader.ReadInt32();
-			byte[] statsBuffer = reader.ReadBytes(statLength);
-			save.StatTable.UnknownVariable1 = BitConverter.ToInt32(statsBuffer, 0);
-			save.StatTable.TotalBytesSize = BitConverter.ToInt32(statsBuffer, 4);
-			save.StatTable.TotalEntries = BitConverter.ToInt16(statsBuffer, 8);
-
-			for (Int16 x = 0; x < save.StatTable.TotalEntries; ++x) {
-				Stat stat = new Stat();
-				save.StatTable.Stats.Add(stat);
-				stat.ID = statsBuffer[10 + 7 * x];
-				stat.UnknownVariable1 = statsBuffer[11 + 7 * x];
-				stat.UnknownVariable2 = statsBuffer[12 + 7 * x];
-				stat.Value = BitConverter.ToUInt32(statsBuffer, 13 + 7 * x);
-				if (Stat.StatDefinitions.ContainsKey(stat.ID)) {
-					save.Stats.Add(Stat.StatDefinitions[stat.ID], stat);
-				}
-			}
+			save.StatTable.ReadStats(reader);
 
 			// Visited locations.
 
@@ -434,7 +386,7 @@ namespace Borderlands_Save_Editor.Save {
 			WriteInt32(writer, StatTable.UnknownVariable1);
 			WriteInt32(writer, StatTable.TotalBytesSize);
 			writer.Write(StatTable.TotalEntries);
-			foreach (var stat in StatTable.Stats) {
+			foreach (var stat in StatTable.Stats.Values) {
 				writer.Write(stat.ID);
 				writer.Write(stat.UnknownVariable1);
 				writer.Write(stat.UnknownVariable2);
@@ -598,12 +550,6 @@ namespace Borderlands_Save_Editor.Save {
 		/// A list of this character's weapons.
 		/// </summary>
 		public List<Weapon> Weapons;
-
-		/// <summary>
-		/// All of the stats that are tracked by this character.
-		/// </summary>
-		[Obsolete("Use the StatTable field instead.")]
-		public Dictionary<StatID, Stat> Stats;
 
 		/// <summary>
 		/// All of the stats that are tracked by this character.

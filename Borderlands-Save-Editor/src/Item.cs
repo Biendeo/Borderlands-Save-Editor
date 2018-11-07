@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,6 +73,25 @@ namespace Borderlands_Save_Editor {
 	/// Describes all the properties of an item.
 	/// </summary>
 	public class Item {
+		/// <summary>
+		/// Constructs an item given a reader on the save file at the correct position.
+		/// </summary>
+		/// <param name="reader"></param>
+		public Item(BinaryReader reader) {
+			InternalItemCategory = reader.BL_ReadString();
+			InternalItemType = reader.BL_ReadString();
+			InternalItemBody = reader.BL_ReadString();
+			InternalItemLeft = reader.BL_ReadString();
+			InternalItemRight = reader.BL_ReadString();
+			InternalItemMaterial = reader.BL_ReadString();
+			InternalItemManufacturer = reader.BL_ReadString();
+			InternalItemPrefix = reader.BL_ReadString();
+			InternalItemTitle = reader.BL_ReadString();
+			UnknownVariable1 = reader.ReadInt32();
+			UnknownVariable2 = reader.ReadInt32();
+			Equipped = reader.ReadInt32();
+		}
+
 		/// <summary>
 		/// The internal name of this item's category.
 		/// </summary>
