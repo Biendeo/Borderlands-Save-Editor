@@ -580,12 +580,15 @@ namespace Borderlands_Save_Editor.Save {
 		/// TODO: Migrate towards storing the date as a <see cref="DateTime"/> and use a get/set on
 		/// this field.
 		/// </summary>
-		public string SaveTimeString;
+		public string SaveTimeString {
+			get { return SaveTime.ToString("yyyyMMddhhmmss"); }
+			set { SaveTime = new DateTime(int.Parse(value.Substring(0, 4)), int.Parse(value.Substring(4, 2)), int.Parse(value.Substring(6, 2)), int.Parse(value.Substring(8, 2)), int.Parse(value.Substring(10, 2)), int.Parse(value.Substring(12, 2))); }
+		}
 
 		/// <summary>
 		/// Represents the last save time as a <see cref="DateTime"/> object.
 		/// </summary>
-		public DateTime SaveTime { get { return new DateTime(int.Parse(SaveTimeString.Substring(0, 4)), int.Parse(SaveTimeString.Substring(4, 2)), int.Parse(SaveTimeString.Substring(6, 2)), int.Parse(SaveTimeString.Substring(8, 2)), int.Parse(SaveTimeString.Substring(10, 2)), int.Parse(SaveTimeString.Substring(12, 2))); } }
+		public DateTime SaveTime;
 
 		/// <summary>
 		/// The name of the player's character.
