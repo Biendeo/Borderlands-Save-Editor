@@ -582,6 +582,10 @@ namespace Borderlands_Save_Editor.Save {
 		/// this field.
 		/// </summary>
 		public string SaveTimeString;
+
+		/// <summary>
+		/// Represents the last save time as a <see cref="DateTime"/> object.
+		/// </summary>
 		public DateTime SaveTime { get { return new DateTime(int.Parse(SaveTimeString.Substring(0, 4)), int.Parse(SaveTimeString.Substring(4, 2)), int.Parse(SaveTimeString.Substring(6, 2)), int.Parse(SaveTimeString.Substring(8, 2)), int.Parse(SaveTimeString.Substring(10, 2)), int.Parse(SaveTimeString.Substring(12, 2))); } }
 
 		/// <summary>
@@ -632,125 +636,6 @@ namespace Borderlands_Save_Editor.Save {
 		/// It seems to relate to the bank used in the DLC, but its format is not known.
 		/// </summary>
 		public byte[] UnknownVariable17;
-
-		/// <summary>
-		/// Reads a byte array from the stream.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <param name="length"></param>
-		/// <returns></returns>
-		[Obsolete("Just read the value", true)]
-		public static byte[] ReadByteArray(MemoryStream stream, int length) {
-			byte[] buffer = new byte[length];
-			stream.Read(buffer, 0, length);
-			return buffer;
-		}
-
-		/// <summary>
-		/// Reads a string from a given string. The string starts with a 4-byte int of the length of
-		/// the string, followed by the string content itself.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <returns></returns>
-		[Obsolete("Use the extension function BL_ReadString instead", true)]
-		public static string ReadString(MemoryStream stream) {
-			Int32 length = ReadInt32(stream);
-			byte[] buffer = new byte[length];
-			stream.Read(buffer, 0, length);
-			// The trimming is because all of these strings are 0 terminated. Weird that they also
-			// include the length.
-			return Encoding.ASCII.GetString(buffer).TrimEnd('\0');
-		}
-
-		/// <summary>
-		/// Reads an <see cref="Int32"/> from the stream.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <returns></returns>
-		[Obsolete("Just read the value", true)]
-		public static Int32 ReadInt32(MemoryStream stream) {
-			byte[] buffer = new byte[4];
-			stream.Read(buffer, 0, 4);
-			return BitConverter.ToInt32(buffer, 0);
-		}
-
-		/// <summary>
-		/// Reads a <see cref="UInt32"/> from the stream.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <returns></returns>
-		[Obsolete("Just read the value", true)]
-		public static UInt32 ReadUInt32(MemoryStream stream) {
-			byte[] buffer = new byte[4];
-			stream.Read(buffer, 0, 4);
-			return BitConverter.ToUInt32(buffer, 0);
-		}
-
-		/// <summary>
-		/// Reads a <see cref="float"/> from the stream.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <returns></returns>
-		[Obsolete("Just read the value", true)]
-		public static float ReadFloat(MemoryStream stream) {
-			byte[] buffer = new byte[4];
-			stream.Read(buffer, 0, 4);
-			return BitConverter.ToSingle(buffer, 0);
-		}
-
-		/// <summary>
-		/// Writes a byte array to the stream.
-		/// </summary>
-		/// <param name="writer"></param>
-		/// <param name="arr"></param>
-		[Obsolete("Just write the array", true)]
-		public static void WriteByteArray(BinaryWriter writer, byte[] arr) {
-			writer.Write(arr);
-		}
-
-		/// <summary>
-		/// Writes a string to the stream.
-		/// </summary>
-		/// <param name="writer"></param>
-		/// <param name="str"></param>
-		[Obsolete("Use the extension function BL_WriteString instead", true)]
-		public static void WriteString(BinaryWriter writer, string str) {
-			WriteInt32(writer, str.Length + 1);
-			writer.Write(Encoding.ASCII.GetBytes(str));
-			//writer.Write(str);
-			// The terminating 0 was removed when reading, so we write it.
-			writer.Write((byte)'\0');
-		}
-
-		/// <summary>
-		/// Writes an <see cref="Int32"/> to the stream.
-		/// </summary>
-		/// <param name="writer"></param>
-		/// <param name="i"></param>
-		[Obsolete("Just write the value", true)]
-		public static void WriteInt32(BinaryWriter writer, Int32 i) {
-			writer.Write(i);
-		}
-
-		/// <summary>
-		/// Writes a <see cref="UInt32"/> to the stream.
-		/// </summary>
-		/// <param name="writer"></param>
-		/// <param name="i"></param>
-		[Obsolete("Just write the value", true)]
-		public static void WriteUInt32(BinaryWriter writer, UInt32 i) {
-			writer.Write(i);
-		}
-
-		/// <summary>
-		/// Writes a <see cref="float"/> to the stream.
-		/// </summary>
-		/// <param name="writer"></param>
-		/// <param name="f"></param>
-		[Obsolete("Just write the value", true)]
-		public static void WriteFloat(BinaryWriter writer, float f) {
-			writer.Write(f);
-		}
 
 		/// <summary>
 		/// The header used by save formats.
