@@ -80,12 +80,16 @@ namespace Borderlands_Save_Editor {
 		/// <summary>
 		/// The amount of ammo stored by this pool. It is interestingly stored as a float, maybe for
 		/// regenerating ammo weapons?
+		/// 
+		/// Setting this value to less or more than the available ammo range will clamp the value to
+		/// that end (i.e. below 0 will become 0, above the maximum amount will become that amount).
 		/// </summary>
 		public float Ammo;
 
 		/// <summary>
 		/// Indicates what level the pool has been upgraded too. This dictates the maximum capacity
-		/// of ammo that can be stored. Different weapon types will sit at different amounts.
+		/// of ammo that can be stored. Different weapon types will sit at different amounts. This
+		/// value goes between 0 and 6 inclusive. Any other value will default to 0.
 		/// 
 		/// TODO: Note how much ammo is stored in each level.
 		/// </summary>

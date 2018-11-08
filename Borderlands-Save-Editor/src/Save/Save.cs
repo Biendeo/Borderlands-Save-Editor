@@ -486,10 +486,9 @@ namespace Borderlands_Save_Editor.Save {
 		public Int32 BackpackSlots;
 
 		/// <summary>
-		/// The amount of weapon slots available to the player.
-		/// 
-		/// TODO: Experiment with increasing this and settiing weapons to fill those slots. Does it
-		/// work?
+		/// The amount of weapon slots available to the player. This can be set to any amount,
+		/// although any value less than 12 will automatically be bumped up to 12. The game can only
+		/// represent the total capacity as 4 digits, but any number will work.
 		/// </summary>
 		public Int32 WeaponSlots;
 
@@ -655,6 +654,4 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		public static readonly Int32[] ExperienceToLevels = { 0, 0, 358, 1241, 2850, 5376, 8997, 13886, 20208, 28126, 37798, 49377, 63016, 78861, 97061, 117757, 141092, 167206, 196238, 228322, 263595, 302190, 344238, 389873, 439222, 492414, 549578, 610840, 676325, 746158, 820463, 899363, 982980, 1071435, 1164850, 1263343, 1367034, 1476041, 1590483, 1710476, 1836137, 1967582, 2104926, 2248285, 2397772, 2553501, 2715586, 2884139, 3059273, 3241098, 3429728, 3625271, 3827840, 4037543, 4254491, 4478792, 4710556, 4949890, 5196902, 5451701, 5714393, 5985086, 6263885, 6550897, 6846227, 7149982, 7462266, 7783184, 8112840, 8451340, 8798786, 9155282, 9520932 };
 	}
-
-
 }
