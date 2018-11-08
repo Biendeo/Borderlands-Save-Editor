@@ -325,73 +325,34 @@ namespace Borderlands_Save_Editor.Save {
 			Skills.WriteAllSkills(writer);
 
 			// Some unknown stuff.
-			WriteInt32(writer, UnknownVariable2);
-			WriteInt32(writer, UnknownVariable3);
-			WriteInt32(writer, UnknownVariable4);
-			WriteInt32(writer, UnknownVariable5);
+			writer.Write(UnknownVariable2);
+			writer.Write(UnknownVariable3);
+			writer.Write(UnknownVariable4);
+			writer.Write(UnknownVariable5);
 
 			// Ammo.
-			WriteInt32(writer, Ammo.Count);
+			writer.Write(Ammo.Count);
 			foreach (var ammo in Ammo) {
-				WriteString(writer, ammo.Value.InternalName);
-				WriteString(writer, ammo.Value.PoolInternalName);
-				WriteFloat(writer, ammo.Value.Ammo);
-				WriteInt32(writer, ammo.Value.UpgradeLevel);
+				ammo.Value.Write(writer);
 			}
 
 			// Items.
-			WriteInt32(writer, Items.Count);
+			writer.Write(Items.Count);
 			foreach (var item in Items) {
-				WriteString(writer, item.InternalItemCategory);
-				WriteString(writer, item.InternalItemType);
-				WriteString(writer, item.InternalItemBody);
-				WriteString(writer, item.InternalItemLeft);
-				WriteString(writer, item.InternalItemRight);
-				WriteString(writer, item.InternalItemMaterial);
-				WriteString(writer, item.InternalItemManufacturer);
-				WriteString(writer, item.InternalItemPrefix);
-				WriteString(writer, item.InternalItemTitle);
-				WriteInt32(writer, item.UnknownVariable1);
-				WriteInt32(writer, item.UnknownVariable2);
-				WriteInt32(writer, item.Equipped);
+				item.Write(writer);
 			}
 
-			WriteInt32(writer, BackpackSlots);
-			WriteInt32(writer, WeaponSlots);
+			writer.Write(BackpackSlots);
+			writer.Write(WeaponSlots);
 
 			// Weapons.
-			WriteInt32(writer, Weapons.Count);
+			writer.Write(Weapons.Count);
 			foreach (var weapon in Weapons) {
-				WriteString(writer, weapon.InternalWeaponCategory);
-				WriteString(writer, weapon.InternalWeaponManufacturer);
-				WriteString(writer, weapon.InternalWeaponType);
-				WriteString(writer, weapon.InternalWeaponBody);
-				WriteString(writer, weapon.InternalWeaponGrip);
-				WriteString(writer, weapon.InternalWeaponMag);
-				WriteString(writer, weapon.InternalWeaponBarrel);
-				WriteString(writer, weapon.InternalWeaponSight);
-				WriteString(writer, weapon.InternalWeaponStock);
-				WriteString(writer, weapon.InternalWeaponAction);
-				WriteString(writer, weapon.InternalWeaponAccessory);
-				WriteString(writer, weapon.InternalWeaponMaterial);
-				WriteString(writer, weapon.InternalWeaponPrefix);
-				WriteString(writer, weapon.InternalWeaponTitle);
-				WriteInt32(writer, weapon.UnknownVariable1);
-				WriteInt32(writer, weapon.UnknownVariable2);
-				WriteInt32(writer, weapon.EquippedSlot);
+				weapon.Write(writer);
 			}
 
 			// Stats.
-			WriteInt32(writer, 10 + StatTable.Stats.Count * 7);
-			WriteInt32(writer, StatTable.UnknownVariable1);
-			WriteInt32(writer, StatTable.TotalBytesSize);
-			writer.Write(StatTable.TotalEntries);
-			foreach (var stat in StatTable.Stats.Values) {
-				writer.Write(stat.ID);
-				writer.Write(stat.UnknownVariable1);
-				writer.Write(stat.UnknownVariable2);
-				WriteUInt32(writer, stat.Value);
-			}
+			StatTable.Write(writer);
 
 			// Visited locations.
 			WriteInt32(writer, LocationsVisited.Count);

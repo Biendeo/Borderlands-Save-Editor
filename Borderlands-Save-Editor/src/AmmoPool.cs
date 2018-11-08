@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,17 @@ namespace Borderlands_Save_Editor {
 	/// Stores properties about a pool of ammo that a player has.
 	/// </summary>
 	public class AmmoPool {
+		/// <summary>
+		/// Writes this ammo pool to a given writer in the Borderlands save format.
+		/// </summary>
+		/// <param name="writer"></param>
+		public void Write(BinaryWriter writer) {
+			writer.Write(InternalName);
+			writer.Write(PoolInternalName);
+			writer.Write(Ammo);
+			writer.Write(UpgradeLevel);
+		}
+
 		/// <summary>
 		/// The internal name of the ammo in this pool used by a save file.
 		/// </summary>

@@ -231,25 +231,21 @@ namespace Borderlands_Save_Editor {
 			Value = reader.ReadUInt32();
 		}
 
-		/*
 		/// <summary>
-		/// The stat ID used by the save format.
+		/// Writes this stat to the given writer in the save format.
 		/// </summary>
-		public Byte ID;
-
-		/// <summary>
-		/// The <see cref="StatID"/> of this stat.
-		/// </summary>
-		public StatID StatID {
-			get { return StatDefinitions[ID]; }
+		/// <param name="writer"></param>
+		public void Write(BinaryWriter writer) {
+			writer.Write(ID);
+			writer.Write(UnknownVariable1);
+			writer.Write(UnknownVariable2);
+			writer.Write(Value);
 		}
 
-
-		/*/
 		/// <summary>
 		/// The stat ID used by the save format.
 		/// </summary>
-	public Byte ID {
+		public Byte ID {
 			get { return StatDefinitions.FirstOrDefault(x => x.Value == StatID).Key; }
 			set { StatID = StatDefinitions[value]; }
 		}
@@ -258,7 +254,6 @@ namespace Borderlands_Save_Editor {
 		/// The <see cref="StatID"/> of this stat.
 		/// </summary>
 		public StatID StatID;
-		
 
 		/// <summary>
 		/// An unknown variable. It seems to always be 6.

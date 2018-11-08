@@ -93,6 +93,26 @@ namespace Borderlands_Save_Editor {
 		}
 
 		/// <summary>
+		/// Writes this item to a writer in the save format.
+		/// </summary>
+		/// <param name="writer"></param>
+		public void Write(BinaryWriter writer) {
+			writer.BL_WriteString(InternalItemCategory);
+			writer.BL_WriteString(InternalItemType);
+			writer.BL_WriteString(InternalItemBody);
+			writer.BL_WriteString(InternalItemLeft);
+			writer.BL_WriteString(InternalItemRight);
+			writer.BL_WriteString(InternalItemMaterial);
+			writer.BL_WriteString(InternalItemManufacturer);
+			writer.BL_WriteString(InternalItemPrefix);
+			writer.BL_WriteString(InternalItemTitle);
+			writer.Write(UnknownVariable1);
+			writer.Write(UnknownVariable2);
+			writer.Write(Equipped);
+
+		}
+
+		/// <summary>
 		/// The internal name of this item's category.
 		/// </summary>
 		public string InternalItemCategory;

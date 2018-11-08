@@ -27,10 +27,24 @@ namespace Borderlands_Save_Editor {
 			Stats.Clear();
 			for (Int16 x = 0; x < TotalEntries; ++x) {
 				var stat = new Stat(statsReader);
-				Stats.Add(stat.ID, stat);
+				Stats[stat.StatID] = stat;
 			}
 		}
-		
+
+		/// <summary>
+		/// Writes this stats table to the given writer in the save format.
+		/// </summary>
+		/// <param name="writer"></param>
+		public void Write(BinaryWriter writer) {
+			writer.Write(10 + Stats.Count * 7);
+			writer.Write(UnknownVariable1);
+			writer.Write(TotalBytesSize);
+			writer.Write(TotalEntries);
+			foreach (var stat in Stats.Values) {
+				stat.Write(writer);
+			}
+		}
+
 		/// <summary>
 		/// An unknown variable.
 		/// </summary>
@@ -51,20 +65,18 @@ namespace Borderlands_Save_Editor {
 		/// <summary>
 		/// All the stats in the game.
 		/// </summary>
-		public Dictionary<Byte, Stat> Stats;
+		public Dictionary<StatID, Stat> Stats;
 
 		/// <summary>
 		/// Constructs an empty stat table.
 		/// </summary>
 		public StatsTable() {
-			Stats = new Dictionary<Byte, Stat>();
-			/*
+			Stats = new Dictionary<StatID, Stat>();
 			foreach (StatID id in Enum.GetValues(typeof(StatID))) {
 				Stats.Add(id, new Stat {
 					StatID = id
 				});
 			}
-			*/
 		}
 	}
 }

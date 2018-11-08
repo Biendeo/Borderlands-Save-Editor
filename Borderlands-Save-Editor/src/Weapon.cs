@@ -133,6 +133,30 @@ namespace Borderlands_Save_Editor {
 		}
 
 		/// <summary>
+		/// Writes this weapon to a writer in the Borderlands save format.
+		/// </summary>
+		/// <param name="writer"></param>
+		public void Write(BinaryWriter writer) {
+			writer.BL_WriteString(InternalWeaponCategory);
+			writer.BL_WriteString(InternalWeaponManufacturer);
+			writer.BL_WriteString(InternalWeaponType);
+			writer.BL_WriteString(InternalWeaponBody);
+			writer.BL_WriteString(InternalWeaponGrip);
+			writer.BL_WriteString(InternalWeaponMag);
+			writer.BL_WriteString(InternalWeaponBarrel);
+			writer.BL_WriteString(InternalWeaponSight);
+			writer.BL_WriteString(InternalWeaponStock);
+			writer.BL_WriteString(InternalWeaponAction);
+			writer.BL_WriteString(InternalWeaponAccessory);
+			writer.BL_WriteString(InternalWeaponMaterial);
+			writer.BL_WriteString(InternalWeaponPrefix);
+			writer.BL_WriteString(InternalWeaponTitle);
+			writer.Write(UnknownVariable1);
+			writer.Write(UnknownVariable2);
+			writer.Write(EquippedSlot);
+		}
+
+		/// <summary>
 		/// The internal string used by the save file for this weapon's category.
 		/// </summary>
 		public string InternalWeaponCategory;

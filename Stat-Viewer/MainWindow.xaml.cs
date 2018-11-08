@@ -277,7 +277,7 @@ namespace Stat_Viewer {
 						challengeTotal += goal.Count;
 						//? Once I know the values, there shouldn't be a try/catch here.
 						try {
-							challengeValue += Math.Min(goal.Count, (int)currentSave.Stats[goal.Stat].Value);
+							challengeValue += Math.Min(goal.Count, (int)currentSave.StatTable.Stats[goal.Stat].Value);
 						} catch {
 
 						}
