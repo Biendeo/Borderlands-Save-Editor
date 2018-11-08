@@ -355,88 +355,74 @@ namespace Borderlands_Save_Editor.Save {
 			StatTable.Write(writer);
 
 			// Visited locations.
-			WriteInt32(writer, LocationsVisited.Count);
+			writer.Write(LocationsVisited.Count);
 			foreach (var location in LocationsVisited) {
-				WriteString(writer, location);
+				writer.BL_WriteString(location);
 			}
 
-			WriteString(writer, CurrentLocation);
+			writer.BL_WriteString(CurrentLocation);
 
-			WriteInt32(writer, UnknownVariable6);
-			WriteInt32(writer, UnknownVariable7);
-			WriteString(writer, UnknownVariable8);
-			WriteInt32(writer, UnknownVariable9);
-			WriteInt32(writer, UnknownVariable10);
-			WriteInt32(writer, SaveNumber);
-			WriteInt32(writer, UnknownVariable12);
-			WriteUInt32(writer, 0);
+			writer.Write(UnknownVariable6);
+			writer.Write(UnknownVariable7);
+			writer.BL_WriteString(UnknownVariable8);
+			writer.Write(UnknownVariable9);
+			writer.Write(UnknownVariable10);
+			writer.Write(SaveNumber);
+			writer.Write(UnknownVariable12);
+			writer.Write(0u);
 
 			// Playthroughs.
-			WriteInt32(writer, Playthroughs.Count);
+			writer.Write(Playthroughs.Count);
 			foreach (var playthrough in Playthroughs) {
-				WriteInt32(writer, playthrough.Number);
-				WriteString(writer, playthrough.ActiveMissionName);
-				WriteInt32(writer, playthrough.Missions.Count);
+				writer.Write(playthrough.Number);
+				writer.BL_WriteString(playthrough.ActiveMissionName);
+				writer.Write(playthrough.Missions.Count);
 				foreach (var mission in playthrough.Missions) {
-					WriteString(writer, mission.InternalName);
-					WriteInt32(writer, mission.MissionStatusFlag);
-					WriteInt32(writer, mission.UnknownVariable2);
-					WriteInt32(writer, mission.UnknownVariable3);
-					WriteInt32(writer, mission.Details.Count);
+					writer.BL_WriteString(mission.InternalName);
+					writer.Write(mission.MissionStatusFlag);
+					writer.Write(mission.UnknownVariable2);
+					writer.Write(mission.UnknownVariable3);
+					writer.Write(mission.Details.Count);
 					foreach (var detail in mission.Details) {
-						WriteString(writer, detail.UnknownString);
-						WriteInt32(writer, detail.UnknownVariable);
+						writer.BL_WriteString(detail.UnknownString);
+						writer.Write(detail.UnknownVariable);
 					}
 				}
 			}
 
-			WriteInt32(writer, PlayTimeSeconds);
-			WriteString(writer, SaveTimeString);
-			WriteString(writer, Name);
-			WriteUInt32(writer, Color1);
-			WriteUInt32(writer, Color2);
-			WriteUInt32(writer, Color3);
+			writer.Write(PlayTimeSeconds);
+			writer.BL_WriteString(SaveTimeString);
+			writer.BL_WriteString(Name);
+			writer.Write(Color1);
+			writer.Write(Color2);
+			writer.Write(Color3);
 
-			WriteInt32(writer, UnknownVariable14);
-			WriteInt32(writer, UnknownVariable15.Count);
-			foreach (var x in UnknownVariable15) {
-				WriteInt32(writer, x);
+			writer.Write(UnknownVariable14);
+			writer.Write(UnknownVariable15.Count);
+			foreach (Int32 x in UnknownVariable15) {
+				writer.Write(x);
 			}
-			WriteInt32(writer, UnknownVariable16.Count);
-			foreach (var x in UnknownVariable16) {
-				WriteInt32(writer, x);
+			writer.Write(UnknownVariable16.Count);
+			foreach (Int32 x in UnknownVariable16) {
+				writer.Write(x);
 			}
 
 			// Echo
-			WriteInt32(writer, EchoPlaythroughs.Count);
+			writer.Write(EchoPlaythroughs.Count);
 			foreach (var echoPlaythrough in EchoPlaythroughs) {
-				WriteInt32(writer, echoPlaythrough.Playthrough);
-				WriteInt32(writer, echoPlaythrough.Echoes.Count);
+				writer.Write(echoPlaythrough.Playthrough);
+				writer.Write(echoPlaythrough.Echoes.Count);
 				foreach (var echo in echoPlaythrough.Echoes) {
-					WriteString(writer, echo.InternalName);
-					WriteInt32(writer, echo.UnknownVariable1);
-					WriteInt32(writer, echo.UnknownVariable2);
+					writer.BL_WriteString(echo.InternalName);
+					writer.Write(echo.UnknownVariable1);
+					writer.Write(echo.UnknownVariable2);
 				}
 			}
 
-			WriteInt32(writer, UnknownVariable17.Length);
+			writer.Write(UnknownVariable17.Length);
 			writer.Write(UnknownVariable17);
 
 			writer.Close();
-		}
-
-		[Obsolete("Use the getter object SaveFileName instead.")]
-		/// <summary>
-		/// Returns the name of a save file that would be stored with the current save's number.
-		/// This is simply in the form of save%04x.sav, where %04x is the save number as a four
-		/// hex-degit string.
-		/// 
-		/// This is necessary as, while the game can read any save file inside the save folder, it
-		/// only writes to this specific path.
-		/// </summary>
-		/// <returns></returns>
-		public string SaveNameOld() {
-			return "save" + SaveNumber.ToString("X4") + ".sav";
 		}
 
 		/// <summary>
@@ -648,26 +634,12 @@ namespace Borderlands_Save_Editor.Save {
 		public byte[] UnknownVariable17;
 
 		/// <summary>
-		/// Returns a subarray of a given array, given the starting index and th length of the subarray.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="data"></param>
-		/// <param name="index"></param>
-		/// <param name="length"></param>
-		/// <returns></returns>
-		public static T[] SubArray<T>(T[] data, int index, int length) {
-			T[] result = new T[length];
-			Array.Copy(data, index, result, 0, length);
-			return result;
-		}
-
-		/// <summary>
 		/// Reads a byte array from the stream.
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <param name="length"></param>
 		/// <returns></returns>
-		[Obsolete("Just read the value")]
+		[Obsolete("Just read the value", true)]
 		public static byte[] ReadByteArray(MemoryStream stream, int length) {
 			byte[] buffer = new byte[length];
 			stream.Read(buffer, 0, length);
@@ -680,7 +652,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <returns></returns>
-		[Obsolete("Use the extension function BL_ReadString instead")]
+		[Obsolete("Use the extension function BL_ReadString instead", true)]
 		public static string ReadString(MemoryStream stream) {
 			Int32 length = ReadInt32(stream);
 			byte[] buffer = new byte[length];
@@ -695,7 +667,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <returns></returns>
-		[Obsolete("Just read the value")]
+		[Obsolete("Just read the value", true)]
 		public static Int32 ReadInt32(MemoryStream stream) {
 			byte[] buffer = new byte[4];
 			stream.Read(buffer, 0, 4);
@@ -707,7 +679,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <returns></returns>
-		[Obsolete("Just read the value")]
+		[Obsolete("Just read the value", true)]
 		public static UInt32 ReadUInt32(MemoryStream stream) {
 			byte[] buffer = new byte[4];
 			stream.Read(buffer, 0, 4);
@@ -719,7 +691,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <returns></returns>
-		[Obsolete("Just read the value")]
+		[Obsolete("Just read the value", true)]
 		public static float ReadFloat(MemoryStream stream) {
 			byte[] buffer = new byte[4];
 			stream.Read(buffer, 0, 4);
@@ -731,7 +703,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="writer"></param>
 		/// <param name="arr"></param>
-		[Obsolete("Just write the array")]
+		[Obsolete("Just write the array", true)]
 		public static void WriteByteArray(BinaryWriter writer, byte[] arr) {
 			writer.Write(arr);
 		}
@@ -741,7 +713,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="writer"></param>
 		/// <param name="str"></param>
-		[Obsolete("Use the extension function BL_WriteString instead")]
+		[Obsolete("Use the extension function BL_WriteString instead", true)]
 		public static void WriteString(BinaryWriter writer, string str) {
 			WriteInt32(writer, str.Length + 1);
 			writer.Write(Encoding.ASCII.GetBytes(str));
@@ -755,7 +727,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="writer"></param>
 		/// <param name="i"></param>
-		[Obsolete("Just write the value")]
+		[Obsolete("Just write the value", true)]
 		public static void WriteInt32(BinaryWriter writer, Int32 i) {
 			writer.Write(i);
 		}
@@ -765,7 +737,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="writer"></param>
 		/// <param name="i"></param>
-		[Obsolete("Just write the value")]
+		[Obsolete("Just write the value", true)]
 		public static void WriteUInt32(BinaryWriter writer, UInt32 i) {
 			writer.Write(i);
 		}
@@ -775,7 +747,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// </summary>
 		/// <param name="writer"></param>
 		/// <param name="f"></param>
-		[Obsolete("Just write the value")]
+		[Obsolete("Just write the value", true)]
 		public static void WriteFloat(BinaryWriter writer, float f) {
 			writer.Write(f);
 		}

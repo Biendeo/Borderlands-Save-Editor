@@ -53,8 +53,8 @@ namespace Borderlands_Save_Editor {
 		/// </summary>
 		/// <param name="writer"></param>
 		public void Write(BinaryWriter writer) {
-			writer.Write(InternalName);
-			writer.Write(PoolInternalName);
+			writer.BL_WriteString(InternalName);
+			writer.BL_WriteString(PoolInternalName);
 			writer.Write(Ammo);
 			writer.Write(UpgradeLevel);
 		}
