@@ -565,13 +565,16 @@ namespace Borderlands_Save_Editor.Save {
 		/// <summary>
 		/// Counts the play time in seconds.
 		/// </summary>
-		public Int32 PlayTimeSeconds;
+		public Int32 PlayTimeSeconds {
+			get { return (Int32)PlayTime.TotalSeconds; }
+			set { PlayTime = TimeSpan.FromSeconds(value); }
+		}
 
 		/// <summary>
 		/// A way to represent the play time as a <see cref="TimeSpan"/> object for useful time
 		/// calculations.
 		/// </summary>
-		public TimeSpan PlayTime { get { return TimeSpan.FromSeconds(PlayTimeSeconds); } }
+		public TimeSpan PlayTime;
 
 		/// <summary>
 		/// Represents the last save time as a string. This string is used internally by the save

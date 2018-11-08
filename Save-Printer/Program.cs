@@ -29,6 +29,7 @@ namespace Save_Printer {
 			save0B.SaveNumber = 0x0B;
 			save0B.BackpackSlots = 100000;
 			save0B.SaveTime = new DateTime(9999, 12, 31, 4, 20, 15);
+			save0B.PlayTime = TimeSpan.FromDays(1000.0);
 			foreach (SkillType type in Enum.GetValues(typeof(SkillType))) {
 				Skill skill = save0B.Skills.GetSkill(type);
 				if (type.Class() == save0B.Details.ClassType) {
