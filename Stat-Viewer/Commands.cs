@@ -7,6 +7,7 @@ using System.Windows.Input;
 
 namespace Stat_Viewer {
 	public class Commands {
+		public static RoutedCommand SaveAsCommand = new RoutedCommand("SaveAsCommand", typeof(MainWindow));
 		public static RoutedCommand QuitCommand = new RoutedCommand("QuitCommand", typeof(MainWindow));
 		public static RoutedCommand AboutCommand = new RoutedCommand("AboutCommand", typeof(MainWindow));
 	}

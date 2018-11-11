@@ -78,10 +78,16 @@ namespace Borderlands_Save_Editor {
 		/// <param name="writer"></param>
 		/// <param name="str"></param>
 		public static void BL_WriteString(this BinaryWriter writer, string str) {
-			writer.Write(str.Length + 1);
-			writer.Write(Encoding.ASCII.GetBytes(str));
-			// The terminating 0 was removed when reading, so we write it.
-			writer.Write((byte)'\0');
+			if (str.Length == 0) {
+				// Some instances of a zero length string exist in the save file, so this just handles those
+				// cases.
+				writer.Write(0);
+			} else {
+				writer.Write(str.Length + 1);
+				writer.Write(Encoding.ASCII.GetBytes(str));
+				// The terminating 0 was removed when reading, so we write it.
+				writer.Write((byte)'\0');
+			}
 		}
 	}
 }

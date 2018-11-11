@@ -17,7 +17,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Stat_Viewer {
 	/// <summary>
@@ -38,6 +37,8 @@ namespace Stat_Viewer {
 			SaveWatcher = null;
 
 			EditMode = false;
+			CurrentFolder = null;
+			CurrentFileName = null;
 
 			InitializeComponent();
 		}
@@ -86,6 +87,10 @@ namespace Stat_Viewer {
 			e.CanExecute = true;
 		}
 
+		private void SaveCommandEnabled(object sender, CanExecuteRoutedEventArgs e) {
+			e.CanExecute = CurrentFolder != null && CurrentFileName != null && File.Exists(Path.Combine(CurrentFolder, CurrentFileName));
+		}
+
 		private void NewCommandExecute(object sender, ExecutedRoutedEventArgs e) {
 			Model.Save = new Save();
 			UpdateAllElements();
@@ -95,15 +100,32 @@ namespace Stat_Viewer {
 			var openDialog = new OpenFileDialog {
 				DefaultExt = "sav",
 				CheckFileExists = true,
-				Multiselect = false
+				Multiselect = false,
+				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"My Games\Borderlands\savedata"
 			};
 			if (openDialog.ShowDialog() == true) {
 				Model.Save = Save.Read(openDialog.FileName);
+				SetupSaveWatcher(new FileInfo(openDialog.FileName).DirectoryName, openDialog.SafeFileName);
 				UpdateAllElements();
 			}
 		}
 
 		private void SaveCommandExecute(object sender, ExecutedRoutedEventArgs e) {
+			string fullPath = Path.Combine(CurrentFolder, Model.Save.SaveFileName);
+			bool fileExists = File.Exists(fullPath);
+			if (fileExists) {
+				var fileExistsResult = MessageBox.Show($"Folder already has a save file \"{Model.Save.SaveFileName}\". Overwrite?", "Overwrite Save?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				if (fileExistsResult != MessageBoxResult.Yes) {
+					return;
+				}
+			}
+			Model.Save.Write(CurrentFolder);
+			if (Model.Save.SaveFileName != CurrentFileName) {
+				SetupSaveWatcher(CurrentFolder, Model.Save.SaveFileName);
+			}
+		}
+
+		private void SaveAsCommandExecute(object sender, ExecutedRoutedEventArgs e) {
 			var saveDialog = new System.Windows.Forms.FolderBrowserDialog();
 			if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
 				string folder = saveDialog.SelectedPath;
@@ -116,6 +138,9 @@ namespace Stat_Viewer {
 					}
 				}
 				Model.Save.Write(folder);
+				if (CurrentFolder == null || CurrentFileName == null) {
+					SetupSaveWatcher(folder, Model.Save.SaveFileName);
+				}
 			}
 		}
 

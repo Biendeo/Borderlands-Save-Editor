@@ -16,6 +16,7 @@
 		<KeyBinding Key="N" Modifiers="Ctrl" Command="New"/>
 		<KeyBinding Key="O" Modifiers="Ctrl" Command="Open"/>
 		<KeyBinding Key="S" Modifiers="Ctrl" Command="Save"/>
+		<KeyBinding Key="S" Modifiers="Shift + Ctrl" Command="SaveAs"/>
 		<KeyBinding Key="F4" Modifiers="Alt" Command="{x:Static local:Commands.QuitCommand}"/>
 		<KeyBinding Key="F2" Command="{x:Static local:Commands.AboutCommand}"/>
 	</Window.InputBindings>
@@ -23,7 +24,8 @@
 	<Window.CommandBindings>
 		<CommandBinding Command="New" CanExecute="CommandAlwaysEnabled" Executed="NewCommandExecute"/>
 		<CommandBinding Command="Open" CanExecute="CommandAlwaysEnabled" Executed="OpenCommandExecute"/>
-		<CommandBinding Command="Save" CanExecute="CommandAlwaysEnabled" Executed="SaveCommandExecute"/>
+		<CommandBinding Command="Save" CanExecute="SaveCommandEnabled" Executed="SaveCommandExecute"/>
+		<CommandBinding Command="SaveAs" CanExecute="CommandAlwaysEnabled" Executed="SaveAsCommandExecute"/>
 		<CommandBinding Command="{x:Static local:Commands.QuitCommand}" CanExecute="CommandAlwaysEnabled" Executed="QuitCommandExecute"/>
 		<CommandBinding Command="{x:Static local:Commands.AboutCommand}" CanExecute="CommandAlwaysEnabled" Executed="AboutCommandExecute"/>
 	</Window.CommandBindings>
@@ -42,6 +44,7 @@
 				<MenuItem Header="New" Command="New"/>
 				<MenuItem Header="Open" Command="Open"/>
 				<MenuItem Header="Save" Command="Save"/>
+				<MenuItem Header="SaveAs" Command="SaveAs"/>
 				<MenuItem Header="Quit" Command="{x:Static local:Commands.QuitCommand}"/>
 			</MenuItem>
 			<MenuItem Header="Options">

@@ -311,7 +311,7 @@ namespace Borderlands_Save_Editor.Save {
 		/// <param name="saveDirectory"></param>
 		public void Write(string saveDirectory) {
 			// The output file is indicated by the save number.
-			BinaryWriter writer = new BinaryWriter(File.OpenWrite(Path.Combine(saveDirectory, SaveFileName)));
+			var writer = new BinaryWriter(File.Create(Path.Combine(saveDirectory, SaveFileName)));
 			//BinaryWriter writer = new BinaryWriter(stream);
 
 			// Firstly, write the header.
