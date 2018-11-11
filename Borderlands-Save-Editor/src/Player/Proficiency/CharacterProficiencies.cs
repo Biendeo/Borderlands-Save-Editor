@@ -57,6 +57,41 @@ namespace Borderlands_Save_Editor.Player.Proficiency {
 		}
 
 		/// <summary>
+		/// Returns the pistol proficiency.
+		/// </summary>
+		public Proficiency Pistol { get { return GetProficiency(ProficiencyType.Pistol); } }
+
+		/// <summary>
+		/// Returns the SMG proficiency.
+		/// </summary>
+		public Proficiency SMG { get { return GetProficiency(ProficiencyType.SMG); } }
+
+		/// <summary>
+		/// Returns the shotgun proficiency.
+		/// </summary>
+		public Proficiency Shotgun { get { return GetProficiency(ProficiencyType.Shotgun); } }
+
+		/// <summary>
+		/// Returns the combat rifle proficiency.
+		/// </summary>
+		public Proficiency CombatRifle { get { return GetProficiency(ProficiencyType.CombatRifle); } }
+
+		/// <summary>
+		/// Returns the sniper rifle proficiency.
+		/// </summary>
+		public Proficiency SniperRifle { get { return GetProficiency(ProficiencyType.SniperRifle); } }
+
+		/// <summary>
+		/// Returns the rocket launcher proficiency.
+		/// </summary>
+		public Proficiency RocketLauncher { get { return GetProficiency(ProficiencyType.RocketLauncher); } }
+
+		/// <summary>
+		/// Returns the Eridian weapon proficiency.
+		/// </summary>
+		public Proficiency Eridian { get { return GetProficiency(ProficiencyType.Eridian); } }
+
+		/// <summary>
 		/// Returns how many proficiencies are active.
 		/// </summary>
 		public int ActiveCount => proficiencies.Count(kv => kv.Value.Activated);

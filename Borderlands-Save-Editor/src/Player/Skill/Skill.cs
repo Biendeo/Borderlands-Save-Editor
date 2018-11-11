@@ -62,7 +62,7 @@ namespace Borderlands_Save_Editor.Player.Skill {
 		/// The level this skill has been upgraded to. This must always be between 0 and 5
 		/// inclusive, since skills cannot go beyond this level.
 		/// </summary>
-		public UInt32 Level { get; set; } // This can't go beyond 5.
+		public UInt32 Level { get; set; }
 
 		/// <summary>
 		/// Skills and proficiencies share the same fields. This field is used by proficiencies to

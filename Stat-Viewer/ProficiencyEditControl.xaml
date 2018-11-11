@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Stat_Viewer.ProficiencyEditControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Stat_Viewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="850">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="4*"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="4*"/>
+		</Grid.ColumnDefinitions>
+
+		<Label Content="Level" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+		<Label Content="Points" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+		<Label Content="Total" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+
+		<Label Content="Pistol:" Grid.Row="1" Grid.Column="0"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=PistolProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="PistolProfLevelSlider" Grid.Row="1" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Pistol.Level}" ValueChanged="PistolProfSliderValueChange"/>
+		<TextBox Grid.Row="1" Grid.Column="3" Text="{Binding ElementName=PistolProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="PistolProfPointsSlider" Grid.Row="1" Grid.Column="4" Maximum="{Binding Save.Proficiencies.Pistol.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Pistol.Points}" ValueChanged="PistolProfSliderValueChange"/>
+		<TextBox Grid.Row="1" Grid.Column="5" Text="{Binding ElementName=PistolProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="PistolProfTotalPointsSlider" Grid.Row="1" Grid.Column="6" Maximum="{Binding Save.Proficiencies.Pistol.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Pistol.TotalPoints}" ValueChanged="PistolProfSliderValueChange"/>
+
+		<Label Content="SMG:" Grid.Row="2" Grid.Column="0"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=SMGProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="SMGProfLevelSlider" Grid.Row="2" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.SMG.Level}" ValueChanged="SMGProfSliderValueChange"/>
+		<TextBox Grid.Row="2" Grid.Column="3" Text="{Binding ElementName=SMGProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="SMGProfPointsSlider" Grid.Row="2" Grid.Column="4" Maximum="{Binding Save.Proficiencies.SMG.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.SMG.Points}" ValueChanged="SMGProfSliderValueChange"/>
+		<TextBox Grid.Row="2" Grid.Column="5" Text="{Binding ElementName=SMGProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="SMGProfTotalPointsSlider" Grid.Row="2" Grid.Column="6" Maximum="{Binding Save.Proficiencies.SMG.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.SMG.TotalPoints}" ValueChanged="SMGProfSliderValueChange"/>
+
+		<Label Content="Shotgun:" Grid.Row="3" Grid.Column="0"/>
+		<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=ShotgunProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="ShotgunProfLevelSlider" Grid.Row="3" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Shotgun.Level}" ValueChanged="ShotgunProfSliderValueChange"/>
+		<TextBox Grid.Row="3" Grid.Column="3" Text="{Binding ElementName=ShotgunProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="ShotgunProfPointsSlider" Grid.Row="3" Grid.Column="4" Maximum="{Binding Save.Proficiencies.Shotgun.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Shotgun.Points}" ValueChanged="ShotgunProfSliderValueChange"/>
+		<TextBox Grid.Row="3" Grid.Column="5" Text="{Binding ElementName=ShotgunProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="ShotgunProfTotalPointsSlider" Grid.Row="3" Grid.Column="6" Maximum="{Binding Save.Proficiencies.Shotgun.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Shotgun.TotalPoints}" ValueChanged="ShotgunProfSliderValueChange"/>
+
+		<Label Content="Combat Rifle:" Grid.Row="4" Grid.Column="0"/>
+		<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=CombatRifleProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="CombatRifleProfLevelSlider" Grid.Row="4" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.CombatRifle.Level}" ValueChanged="CombatRifleProfSliderValueChange"/>
+		<TextBox Grid.Row="4" Grid.Column="3" Text="{Binding ElementName=CombatRifleProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="CombatRifleProfPointsSlider" Grid.Row="4" Grid.Column="4" Maximum="{Binding Save.Proficiencies.CombatRifle.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.CombatRifle.Points}" ValueChanged="CombatRifleProfSliderValueChange"/>
+		<TextBox Grid.Row="4" Grid.Column="5" Text="{Binding ElementName=CombatRifleProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="CombatRifleProfTotalPointsSlider" Grid.Row="4" Grid.Column="6" Maximum="{Binding Save.Proficiencies.CombatRifle.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.CombatRifle.TotalPoints}" ValueChanged="CombatRifleProfSliderValueChange"/>
+
+		<Label Content="Sniper Rifle:" Grid.Row="5" Grid.Column="0"/>
+		<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=SniperRifleProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="SniperRifleProfLevelSlider" Grid.Row="5" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.SniperRifle.Level}" ValueChanged="SniperRifleProfSliderValueChange"/>
+		<TextBox Grid.Row="5" Grid.Column="3" Text="{Binding ElementName=SniperRifleProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="SniperRifleProfPointsSlider" Grid.Row="5" Grid.Column="4" Maximum="{Binding Save.Proficiencies.SniperRifle.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.SniperRifle.Points}" ValueChanged="SniperRifleProfSliderValueChange"/>
+		<TextBox Grid.Row="5" Grid.Column="5" Text="{Binding ElementName=SniperRifleProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="SniperRifleProfTotalPointsSlider" Grid.Row="5" Grid.Column="6" Maximum="{Binding Save.Proficiencies.SniperRifle.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.SniperRifle.TotalPoints}" ValueChanged="SniperRifleProfSliderValueChange"/>
+
+		<Label Content="Rocket Launcher:" Grid.Row="6" Grid.Column="0"/>
+		<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=RocketLauncherProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="RocketLauncherProfLevelSlider" Grid.Row="6" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.RocketLauncher.Level}" ValueChanged="RocketLauncherProfSliderValueChange"/>
+		<TextBox Grid.Row="6" Grid.Column="3" Text="{Binding ElementName=RocketLauncherProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="RocketLauncherProfPointsSlider" Grid.Row="6" Grid.Column="4" Maximum="{Binding Save.Proficiencies.RocketLauncher.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.RocketLauncher.Points}" ValueChanged="RocketLauncherProfSliderValueChange"/>
+		<TextBox Grid.Row="6" Grid.Column="5" Text="{Binding ElementName=RocketLauncherProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="RocketLauncherProfTotalPointsSlider" Grid.Row="6" Grid.Column="6" Maximum="{Binding Save.Proficiencies.RocketLauncher.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.RocketLauncher.TotalPoints}" ValueChanged="RocketLauncherProfSliderValueChange"/>
+
+		<Label Content="Eridian:" Grid.Row="7" Grid.Column="0"/>
+		<TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=EridianProfLevelSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="EridianProfLevelSlider" Grid.Row="7" Grid.Column="2" Maximum="50" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Eridian.Level}" ValueChanged="EridianProfSliderValueChange"/>
+		<TextBox Grid.Row="7" Grid.Column="3" Text="{Binding ElementName=EridianProfPointsSlider, Path=Value, Mode=TwoWay}"/>
+		<Slider Name="EridianProfPointsSlider" Grid.Row="7" Grid.Column="4" Maximum="{Binding Save.Proficiencies.Eridian.PointsForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Eridian.Points}" ValueChanged="EridianProfSliderValueChange"/>
+		<TextBox Grid.Row="7" Grid.Column="5" Text="{Binding ElementName=EridianProfTotalPointsSlider, Path=Value, Mode=TwoWay}" />
+		<Slider Name="EridianProfTotalPointsSlider" Grid.Row="7" Grid.Column="6" Maximum="{Binding Save.Proficiencies.Eridian.TotalPointsForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Proficiencies.Eridian.TotalPoints}" ValueChanged="EridianProfSliderValueChange"/>
+	</Grid>
+</UserControl>

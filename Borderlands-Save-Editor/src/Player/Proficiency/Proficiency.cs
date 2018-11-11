@@ -51,7 +51,7 @@ namespace Borderlands_Save_Editor.Player.Proficiency {
 		/// </summary>
 		/// <param name="level"></param>
 		/// <returns></returns>
-		public Int32 TotalPointsToLevel(uint level) {
+		public static Int32 TotalPointsToLevel(UInt32 level) {
 			if (level <= 0) {
 				return 0;
 			} else if (level > MaximumLevel) {
@@ -67,7 +67,7 @@ namespace Borderlands_Save_Editor.Player.Proficiency {
 		/// </summary>
 		/// <param name="level"></param>
 		/// <returns></returns>
-		public Int32 PointsToLevel(uint level) {
+		public static Int32 PointsToLevel(UInt32 level) {
 			return TotalPointsToLevel(level) - TotalPointsToLevel(level - 1);
 		}
 
@@ -100,7 +100,13 @@ namespace Borderlands_Save_Editor.Player.Proficiency {
 		/// The total number of points associated with this proficiency. This does not reset on a
 		/// level up.
 		/// </summary>
-		public Int32 TotalPoints { get { return Points + PointsToLevel(Level); } }
+		public Int32 TotalPoints {
+			get { return Points + TotalPointsToLevel(Level); }
+			set {
+				Level = LevelFromTotalPoints(value);
+				Points = value - TotalExperiencePointsToLevel[Level];
+			}
+		}
 
 		/// <summary>
 		/// The number of points required for the current level of this proficiency. Shortcuts the
@@ -118,7 +124,35 @@ namespace Borderlands_Save_Editor.Player.Proficiency {
 		/// The total number of experience points required for the maximum level of this
 		/// proficiency.
 		/// </summary>
-		public static Int32 TotalPointsForMaximumLevel { get { return TotalExperiencePointsToLevel[MaximumLevel]; } }
+		public static Int32 TotalPointsForMaximumLevel { get { return TotalPointsToLevel(MaximumLevel); } }
+
+		/// <summary>
+		/// Returns the total amount of points acquired given a current level and the number of
+		/// points in that level.
+		/// </summary>
+		/// <param name="level"></param>
+		/// <param name="points"></param>
+		/// <returns></returns>
+		public static Int32 TotalPointsFromLevelPoints(UInt32 level, Int32 points) {
+			if (level > MaximumLevel) {
+				level = MaximumLevel;
+			}
+			return TotalExperiencePointsToLevel[level] + points;
+		}
+
+		/// <summary>
+		/// Returns the current level given a total number of points. This is clamped between 0 and
+		/// 50 inclusive.
+		/// </summary>
+		/// <param name="points"></param>
+		/// <returns></returns>
+		public static UInt32 LevelFromTotalPoints(Int32 points) {
+			UInt32 currentLevel = 0u;
+			while (currentLevel < MaximumLevel && TotalExperiencePointsToLevel[currentLevel + 1] <= points) {
+				++currentLevel;
+			}
+			return currentLevel;
+		}
 
 		/// <summary>
 		/// Proficiencies have the same internal structure as skills. This slot was used to detect

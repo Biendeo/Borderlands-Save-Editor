@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Stat_Viewer.CharacterViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Stat_Viewer"
+			 xmlns:bse="clr-namespace:Borderlands_Save_Editor.Player.Class;assembly=Borderlands-Save-Editor"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="850">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="3*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="3*"/>
+		</Grid.ColumnDefinitions>
+
+		<Label Content="Name:" Grid.Row="0" Grid.Column="0"/>
+		<Label Name="CharacterNameLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="{Binding Save.Name}" HorizontalAlignment="Stretch"/>
+
+		<Grid Grid.Row="0" Grid.Column="6">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="50"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Save Number:" Grid.Row="0" Grid.Column="0"/>
+			<Label Name="SaveNumberLabel" Grid.Row="0" Grid.Column="1" Content="{Binding Save.SaveNumber}" HorizontalAlignment="Stretch"/>
+		</Grid>
+
+		<Label Content="Level:" Grid.Row="1" Grid.Column="0"/>
+		<Label Name="LevelQuotientLabel" Grid.Row="1" Grid.Column="1" Content="?/?" HorizontalAlignment="Right"/>
+		<Grid Grid.Row="1" Grid.Column="2">
+			<ProgressBar Name="LevelProgressBar" Minimum="0" Maximum="100"/>
+			<TextBlock Text="{Binding ElementName=LevelProgressBar, Path=Value, StringFormat={}{0:0.0000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="XPQuotientLabel" Grid.Row="1" Grid.Column="3" Content="?/?" HorizontalAlignment="Right"/>
+		<Grid Grid.Row="1" Grid.Column="4">
+			<ProgressBar Name="XPProgressBar" Minimum="0" Maximum="100"/>
+			<TextBlock Text="{Binding ElementName=XPProgressBar, Path=Value, StringFormat={}{0:0.0000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+		<Label Name="TotalXPQuotientLabel" Grid.Row="1" Grid.Column="5" Content="?/?" HorizontalAlignment="Right"/>
+		<Grid Grid.Row="1" Grid.Column="6">
+			<ProgressBar Name="TotalXPProgressBar" Minimum="0" Maximum="100"/>
+			<TextBlock Text="{Binding ElementName=TotalXPProgressBar, Path=Value, StringFormat={}{0:0.0000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</Grid>
+
+	</Grid>
+</UserControl>
