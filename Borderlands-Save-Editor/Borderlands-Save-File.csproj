@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="src\AmmoPool.cs" />
     <Compile Include="src\Challenge.cs" />
+    <Compile Include="src\Location\Location.cs" />
     <Compile Include="src\Player\Class\CharacterDetails.cs" />
     <Compile Include="src\Echo.cs" />
     <Compile Include="src\EchoPlaythrough.cs" />

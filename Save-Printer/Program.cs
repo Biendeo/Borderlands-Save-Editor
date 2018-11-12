@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Save_Printer {
 	class Program {
 		static void Main(string[] args) {
-			string savePath = "D:/Documents/my games/borderlands/savedata/";
+			string savePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"my games\borderlands\savedata");
 
 			Save save1 = Save.Read(Path.Combine(savePath, "save0001.sav"));
 			Save save2 = Save.Read(Path.Combine(savePath, "save0002.sav"));
