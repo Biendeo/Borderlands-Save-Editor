@@ -29,7 +29,7 @@ namespace Borderlands_Save_Editor.Save {
 			Weapons = new List<Weapon>();
 			StatTable = new StatsTable();
 			LocationsVisited = new HashSet<Location>();
-			CurrentLocation = "?";
+			CurrentLocation = Location.Fyrestone;
 			Playthroughs = new List<Playthrough>();
 			UnknownVariable15 = new List<Int32>();
 			UnknownVariable16 = new List<Int32>();
@@ -125,7 +125,7 @@ namespace Borderlands_Save_Editor.Save {
 				save.LocationsVisited.Add(LocationExtensions.FromInternalName(reader.BL_ReadString()));
 			}
 
-			save.CurrentLocation = reader.BL_ReadString();
+			save.CurrentLocation = LocationExtensions.FromInternalName(reader.BL_ReadString());
 
 			// Some unknown variables.
 			// I dunno what this is.
@@ -360,7 +360,7 @@ namespace Borderlands_Save_Editor.Save {
 				writer.BL_WriteString(location.InternalName());
 			}
 
-			writer.BL_WriteString(CurrentLocation);
+			writer.BL_WriteString(CurrentLocation.InternalName());
 
 			writer.Write(UnknownVariable6);
 			writer.Write(UnknownVariable7);
@@ -510,9 +510,10 @@ namespace Borderlands_Save_Editor.Save {
 		/// <summary>
 		/// The current location that the player was last saved at.
 		/// 
-		/// This seems to only affect the load menu and not any actual position in the saves.
+		/// Changing this does move the player to that position in playthrough 1, but I have no idea
+		/// where playthrough 2 is sitting.
 		/// </summary>
-		public string CurrentLocation;
+		public Location CurrentLocation;
 
 		/// <summary>
 		/// An unknown variable.

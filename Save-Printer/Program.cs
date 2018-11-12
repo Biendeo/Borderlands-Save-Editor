@@ -21,7 +21,7 @@ namespace Save_Printer {
 			Save save8 = Save.Read(Path.Combine(savePath, "save0008.sav"));
 			Save save9 = Save.Read(Path.Combine(savePath, "save0009.sav"));
 			Save save0A = Save.Read(Path.Combine(savePath, "save000A.sav"));
-			Save save0B = Save.Read(Path.Combine(savePath, "save000A.sav"));
+			Save save0B = Save.Read(Path.Combine(savePath, "save000B.sav"));
 			Save save0C = Save.Read(Path.Combine(savePath, "save000C.sav"));
 			// Try making a new save and read that?
 
@@ -45,6 +45,7 @@ namespace Save_Printer {
 			save0B.Details.LevelExperience = 50000;
 			save0B.Proficiencies.Pistol.Level = 5009;
 			save0B.Proficiencies.Pistol.Points = 500000;
+			save0B.CurrentLocation = Location.TheVault;
 			save0B.Write(savePath);
 			Save save0BTest = Save.Read(Path.Combine(savePath, "save000B.sav"));
 			Console.WriteLine("hello");
