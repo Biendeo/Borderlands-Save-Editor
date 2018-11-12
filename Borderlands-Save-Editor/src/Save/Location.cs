@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borderlands_Save_Editor.Location {
+namespace Borderlands_Save_Editor.Save {
 	/// <summary>
 	/// Defines all the locations used in the game.
 	/// </summary>

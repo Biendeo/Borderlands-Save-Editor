@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="src\AmmoPool.cs" />
     <Compile Include="src\Challenge.cs" />
-    <Compile Include="src\Location\Location.cs" />
+    <Compile Include="src\Save\Location.cs" />
     <Compile Include="src\Player\Class\CharacterDetails.cs" />
     <Compile Include="src\Echo.cs" />
     <Compile Include="src\EchoPlaythrough.cs" />
@@ -68,10 +68,7 @@
     <Compile Include="src\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Mission\" />
-    <Folder Include="src\Player\Inventory\Ammo\" />
-    <Folder Include="src\Player\Inventory\Item\" />
-    <Folder Include="src\Player\Inventory\Weapon\" />
+    <Folder Include="src\Player\Inventory\" />
     <Folder Include="src\Player\Stat\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,7 +28,7 @@ namespace Borderlands_Save_Editor.Save {
 			Items = new List<Item>();
 			Weapons = new List<Weapon>();
 			StatTable = new StatsTable();
-			LocationsVisited = new List<string>();
+			LocationsVisited = new HashSet<Location>();
 			CurrentLocation = "?";
 			Playthroughs = new List<Playthrough>();
 			UnknownVariable15 = new List<Int32>();
@@ -122,7 +122,7 @@ namespace Borderlands_Save_Editor.Save {
 
 			Int32 locationsLength = reader.ReadInt32();
 			for (Int32 x = 0; x < locationsLength; ++x) {
-				save.LocationsVisited.Add(reader.BL_ReadString());
+				save.LocationsVisited.Add(LocationExtensions.FromInternalName(reader.BL_ReadString()));
 			}
 
 			save.CurrentLocation = reader.BL_ReadString();
@@ -356,8 +356,8 @@ namespace Borderlands_Save_Editor.Save {
 
 			// Visited locations.
 			writer.Write(LocationsVisited.Count);
-			foreach (string location in LocationsVisited) {
-				writer.BL_WriteString(location);
+			foreach (var location in LocationsVisited) {
+				writer.BL_WriteString(location.InternalName());
 			}
 
 			writer.BL_WriteString(CurrentLocation);
@@ -503,11 +503,9 @@ namespace Borderlands_Save_Editor.Save {
 		public StatsTable StatTable;
 
 		/// <summary>
-		/// A list of all locations visited.
-		/// 
-		/// TODO: This could be an enum later on.
+		/// All of the locations this player has visited.
 		/// </summary>
-		public List<string> LocationsVisited;
+		public HashSet<Location> LocationsVisited;
 
 		/// <summary>
 		/// The current location that the player was last saved at.
