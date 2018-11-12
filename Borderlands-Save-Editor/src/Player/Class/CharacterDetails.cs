@@ -96,12 +96,16 @@ namespace Borderlands_Save_Editor.Player.Class {
 		}
 
 		/// <summary>
-		/// The character's level.
+		/// The character's level. In-game, this can never leave the range of 1 to 69 inclusive,
+		/// but the save file will list whatever value is stored here. I believe it updates only
+		/// when the player levels up.
 		/// </summary>
 		public Int32 Level { get; set; }
 
 		/// <summary>
-		/// The character's current experience for their current level.
+		/// The character's current experience for their current level. Setting this over the amount
+		/// required for the current level will immediately result in level ups when the save is
+		/// loaded. Negative values are just clamped to 0.
 		/// </summary>
 		public Int32 LevelExperience { get; set; }
 

@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Borderlands_Save_Editor.Save {
 	/// <summary>
@@ -165,9 +166,9 @@ namespace Borderlands_Save_Editor.Save {
 			save.PlayTimeSeconds = reader.ReadInt32();
 			save.SaveTimeString = reader.BL_ReadString();
 			save.Name = reader.BL_ReadString();
-			save.Color1 = reader.ReadUInt32();
-			save.Color2 = reader.ReadUInt32();
-			save.Color3 = reader.ReadUInt32();
+			save.Color1ARGB = reader.ReadUInt32();
+			save.Color2ARGB = reader.ReadUInt32();
+			save.Color3ARGB = reader.ReadUInt32();
 
 			save.UnknownVariable14 = reader.ReadInt32();
 			Int32 unknown14Count = reader.ReadInt32();
@@ -393,9 +394,9 @@ namespace Borderlands_Save_Editor.Save {
 			writer.Write(PlayTimeSeconds);
 			writer.BL_WriteString(SaveTimeString);
 			writer.BL_WriteString(Name);
-			writer.Write(Color1);
-			writer.Write(Color2);
-			writer.Write(Color3);
+			writer.Write(Color1ARGB);
+			writer.Write(Color2ARGB);
+			writer.Write(Color3ARGB);
 
 			writer.Write(UnknownVariable14);
 			writer.Write(UnknownVariable15.Count);
@@ -598,21 +599,45 @@ namespace Borderlands_Save_Editor.Save {
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The first color decided by the player.
-		/// 
-		/// TODO: Figure out how this format works. It's not RGBA, but it does occupy 4 bytes.
+		/// The first color decided by the player. The color is stored in ARGB format in the save
+		/// file. Even though the game only has a few dozen colors to choose from, any ARGB value
+		/// can be used. Alpha is completely ignored in-game.
 		/// </summary>
-		public UInt32 Color1;
+		public Color Color1;
 
 		/// <summary>
-		/// The second color of the player.
+		/// The second color of the player. The color is stored in ARGB format in the save file.
 		/// </summary>
-		public UInt32 Color2;
+		public Color Color2;
 
 		/// <summary>
-		/// The third color of the player.
+		/// The third color of the player. The color is stored in ARGB format in the save file.
 		/// </summary>
-		public UInt32 Color3;
+		public Color Color3;
+
+		/// <summary>
+		/// The first color decided by the player; this format is used by the save format.
+		/// </summary>
+		public UInt32 Color1ARGB {
+			get { return (UInt32)(Color1.A << 24 | Color1.R << 16 | Color1.G << 8 | Color1.B); }
+			set { Color1 = Color.FromArgb((byte)(value >> 24 % 256), (byte)(value >> 16 % 256), (byte)(value >> 8 % 256), (byte)(value % 256)); }
+		}
+
+		/// <summary>
+		/// The second color decided by the player; this format is used by the save format.
+		/// </summary>
+		public UInt32 Color2ARGB {
+			get { return (UInt32)(Color2.A << 24 | Color2.R << 16 | Color2.G << 8 | Color2.B); }
+			set { Color2 = Color.FromArgb((byte)(value >> 24 % 256), (byte)(value >> 16 % 256), (byte)(value >> 8 % 256), (byte)(value % 256)); }
+		}
+
+		/// <summary>
+		/// The third color decided by the player; this format is used by the save format.
+		/// </summary>
+		public UInt32 Color3ARGB {
+			get { return (UInt32)(Color3.A << 24 | Color3.R << 16 | Color3.G << 8 | Color3.B); }
+			set { Color3 = Color.FromArgb((byte)(value >> 24 % 256), (byte)(value >> 16 % 256), (byte)(value >> 8 % 256), (byte)(value % 256)); }
+		}
 
 		/// <summary>
 		/// An unknown variable.
