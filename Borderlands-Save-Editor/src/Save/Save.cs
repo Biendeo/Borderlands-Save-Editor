@@ -78,7 +78,7 @@ namespace Borderlands_Save_Editor.Save {
 			}
 
 			// Then there's stuff that no one knows.
-			save.UnknownVariable2 = reader.ReadInt32();
+			save.VehicleColor = reader.ReadInt32();
 			save.UnknownVariable3 = reader.ReadInt32();
 			save.UnknownVariable4 = reader.ReadInt32();
 			save.UnknownVariable5 = reader.ReadInt32();
@@ -326,7 +326,7 @@ namespace Borderlands_Save_Editor.Save {
 			Skills.WriteAllSkills(writer);
 
 			// Some unknown stuff.
-			writer.Write(UnknownVariable2);
+			writer.Write(VehicleColor);
 			writer.Write(UnknownVariable3);
 			writer.Write(UnknownVariable4);
 			writer.Write(UnknownVariable5);
@@ -449,9 +449,11 @@ namespace Borderlands_Save_Editor.Save {
 		public CharacterSkills Skills { get; set; }
 
 		/// <summary>
-		/// Some unknown variable.
+		/// Sets the color of the player's vehicle. Unlike the player colors, this is simply an
+		/// integer between 0 and 7 inclusive for the 8 different kinds of colors. Any differing
+		/// value will modulus to the correct value.
 		/// </summary>
-		public Int32 UnknownVariable2;
+		public Int32 VehicleColor;
 
 		/// <summary>
 		/// Some unknown variable.
