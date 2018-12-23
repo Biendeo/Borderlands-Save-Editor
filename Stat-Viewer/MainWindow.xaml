@@ -63,7 +63,10 @@
 				</StackPanel>
 			</TabItem>
 			<TabItem Header="Proficiencies">
-				<local:ProficiencyEditControl x:Name="ProficiencyEditControl" Visibility="Collapsed"/>
+				<StackPanel>
+					<local:ProficiencyEditControl x:Name="ProficiencyEditControl" Visibility="Collapsed"/>
+					<local:ProficiencyViewControl x:Name="ProficiencyViewControl" Visibility="Visible"/>
+				</StackPanel>
 			</TabItem>
 			<TabItem Header="Skills">
 				<Grid/>

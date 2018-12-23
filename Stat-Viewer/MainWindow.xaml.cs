@@ -81,6 +81,7 @@ namespace Stat_Viewer {
 			CharacterEditControl.UpdateAllElements();
 			CharacterViewControl.UpdateAllElements();
 			ProficiencyEditControl.UpdateAllElements();
+			ProficiencyViewControl.UpdateAllElements();
 		}
 
 		private void CommandAlwaysEnabled(object sender, CanExecuteRoutedEventArgs e) {
@@ -160,6 +161,7 @@ namespace Stat_Viewer {
 			CharacterEditControl.Visibility = Visibility.Visible;
 			CharacterViewControl.Visibility = Visibility.Collapsed;
 			ProficiencyEditControl.Visibility = Visibility.Visible;
+			ProficiencyViewControl.Visibility = Visibility.Collapsed;
 		}
 
 		private void EditModeUnchecked(object sender, RoutedEventArgs e) {
@@ -167,6 +169,7 @@ namespace Stat_Viewer {
 			CharacterEditControl.Visibility = Visibility.Collapsed;
 			CharacterViewControl.Visibility = Visibility.Visible;
 			ProficiencyEditControl.Visibility = Visibility.Collapsed;
+			ProficiencyViewControl.Visibility = Visibility.Visible;
 		}
 	}
 }

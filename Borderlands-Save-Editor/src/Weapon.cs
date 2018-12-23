@@ -7,107 +7,107 @@ using System.Threading.Tasks;
 
 namespace Borderlands_Save_Editor {
 	/// <summary>
-	/// The category of the weapon.
-	/// </summary>
-	public enum WeaponCategory {
-
-	}
-
-	/// <summary>
-	/// The manufacturer of the weapon.
-	/// </summary>
-	public enum WeaponManufacturer {
-
-	}
-
-	/// <summary>
-	/// The type of the weapon.
-	/// </summary>
-	public enum WeaponType {
-
-	}
-
-	/// <summary>
-	/// The body of the weapon.
-	/// </summary>
-	public enum WeaponBody {
-
-	}
-
-	/// <summary>
-	/// The grip of the weapon.
-	/// </summary>
-	public enum WeaponGrip {
-
-	}
-
-	/// <summary>
-	/// The magazine shape of the weapon.
-	/// </summary>
-	public enum WeaponMag {
-
-	}
-
-	/// <summary>
-	/// The barrel of the weapon.
-	/// </summary>
-	public enum WeaponBarrel {
-
-	}
-
-	/// <summary>
-	/// The sight of the weapon.
-	/// </summary>
-	public enum WeaponSight {
-
-	}
-	
-	/// <summary>
-	/// The stock of the weapon.
-	/// </summary>
-	public enum WeaponStock {
-
-	}
-
-	/// <summary>
-	/// The action of the weapon.
-	/// </summary>
-	public enum WeaponAction {
-
-	}
-
-	/// <summary>
-	/// The accessory of the weapon.
-	/// </summary>
-	public enum WeaponAccessory {
-
-	}
-
-	/// <summary>
-	/// The material of the weapon.
-	/// </summary>
-	public enum WeaponMaterial {
-
-	}
-
-	/// <summary>
-	/// The prefix of the weapon.
-	/// </summary>
-	public enum WeaponPrefix {
-
-	}
-
-	/// <summary>
-	/// The title of the weapon.
-	/// </summary>
-	public enum WeaponTitle {
-
-	}
-
-	/// <summary>
 	/// Stores all the properties of the weapon.
 	/// </summary>
 	public class Weapon {
+		/// <summary>
+		/// The category of the weapon.
+		/// </summary>
+		public enum WeaponCategory {
+
+		}
+
+		/// <summary>
+		/// The manufacturer of the weapon.
+		/// </summary>
+		public enum WeaponManufacturer {
+
+		}
+
+		/// <summary>
+		/// The type of the weapon.
+		/// </summary>
+		public enum WeaponType {
+
+		}
+
+		/// <summary>
+		/// The body of the weapon.
+		/// </summary>
+		public enum WeaponBody {
+
+		}
+
+		/// <summary>
+		/// The grip of the weapon.
+		/// </summary>
+		public enum WeaponGrip {
+
+		}
+
+		/// <summary>
+		/// The magazine shape of the weapon.
+		/// </summary>
+		public enum WeaponMagazine {
+
+		}
+
+		/// <summary>
+		/// The barrel of the weapon.
+		/// </summary>
+		public enum WeaponBarrel {
+
+		}
+
+		/// <summary>
+		/// The sight of the weapon.
+		/// </summary>
+		public enum WeaponSight {
+
+		}
+
+		/// <summary>
+		/// The stock of the weapon.
+		/// </summary>
+		public enum WeaponStock {
+
+		}
+
+		/// <summary>
+		/// The action of the weapon.
+		/// </summary>
+		public enum WeaponAction {
+
+		}
+
+		/// <summary>
+		/// The accessory of the weapon.
+		/// </summary>
+		public enum WeaponAccessory {
+
+		}
+
+		/// <summary>
+		/// The material of the weapon.
+		/// </summary>
+		public enum WeaponMaterial {
+
+		}
+
+		/// <summary>
+		/// The prefix of the weapon.
+		/// </summary>
+		public enum WeaponPrefix {
+
+		}
+
+		/// <summary>
+		/// The title of the weapon.
+		/// </summary>
+		public enum WeaponTitle {
+
+		}
+
 		/// <summary>
 		/// Constructs a weapon from a save file reader at the correct position.
 		/// </summary>
@@ -162,7 +162,7 @@ namespace Borderlands_Save_Editor {
 		public string InternalWeaponCategory;
 
 		/// <summary>
-		/// The internal string used by the save file for this weapon's manufacturer.
+		/// The weapon's manufacturer. Not all manufacturers make weapons.
 		/// </summary>
 		public string InternalWeaponManufacturer;
 
