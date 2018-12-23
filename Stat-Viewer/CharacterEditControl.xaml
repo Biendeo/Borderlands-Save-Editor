@@ -46,5 +46,22 @@
 		<Slider Name="XPSlider" Grid.Row="1" Grid.Column="4" Maximum="{Binding Save.Details.ExperienceForNextLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Details.LevelExperience}" ValueChanged="XPSliderValueChange"/>
 		<TextBox Grid.Row="1" Grid.Column="5" Text="{Binding ElementName=TotalXPSlider, Path=Value, Mode=TwoWay}"/>
 		<Slider Name="TotalXPSlider" Grid.Row="1" Grid.Column="6" Maximum="{Binding Save.Details.TotalExperienceForMaximumLevel}" Minimum="0" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Save.Details.TotalExperience}" ValueChanged="XPSliderValueChange"/>
+
+		<Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Color 1:" Grid.Column="0"/>
+			<Rectangle Name="Color1Rectangle" Width="25" Grid.Column="1" MouseDown="Color1Rectangle_MouseDown"/>
+			<Label Content="Color 2:" Grid.Column="2"/>
+			<Rectangle Name="Color2Rectangle" Width="25" Grid.Column="3" MouseDown="Color2Rectangle_MouseDown"/>
+			<Label Content="Color 3:" Grid.Column="4"/>
+			<Rectangle Name="Color3Rectangle" Width="25" Grid.Column="5" MouseDown="Color3Rectangle_MouseDown"/>
+		</Grid>
 	</Grid>
 </UserControl>

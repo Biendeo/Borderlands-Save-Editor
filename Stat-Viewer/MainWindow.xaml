@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:Stat_Viewer"
 		xmlns:bsf="clr-namespace:Borderlands_Save_Editor.Player.Class;assembly=Borderlands-Save-Editor"
 		mc:Ignorable="d"
-		Title="Stat Viewer" Height="500" Width="875" MinWidth="850" MinHeight="450">
+		Title="Borderlands Save Viewer" Height="500" Width="875" MinWidth="850" MinHeight="450">
 	
 	<Window.DataContext>
 		<local:Model/>

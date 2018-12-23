@@ -30,6 +30,7 @@ namespace Stat_Viewer {
 		public void UpdateAllElements() {
 			UpdateLabelContent();
 			UpdateLevelBars();
+			UpdateColorElements();
 		}
 
 		private void UpdateLabelContent() {
@@ -46,6 +47,14 @@ namespace Stat_Viewer {
 			XPProgressBar.Value = Model.Save.Details.LevelExperience * 100.0 / Model.Save.Details.ExperienceForNextLevel;
 			TotalXPQuotientLabel.Content = $"{Model.Save.Details.TotalExperience}/{CharacterDetails.TotalExperienceForMaximumLevel}";
 			TotalXPProgressBar.Value = Model.Save.Details.TotalExperience * 100.0 / CharacterDetails.TotalExperienceForMaximumLevel;
+		}
+
+		private void UpdateColorElements() {
+			try {
+				Color1Rectangle.Fill = new SolidColorBrush(Model.Save.Color1);
+				Color2Rectangle.Fill = new SolidColorBrush(Model.Save.Color2);
+				Color3Rectangle.Fill = new SolidColorBrush(Model.Save.Color3);
+			} catch (NullReferenceException) { }
 		}
 	}
 }

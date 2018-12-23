@@ -31,6 +31,7 @@ namespace Stat_Viewer {
 		public void UpdateAllElements() {
 			UpdateTextBoxElements();
 			UpdateXPEditElements();
+			UpdateColorElements();
 		}
 
 		private void UpdateTextBoxElements() {
@@ -49,8 +50,28 @@ namespace Stat_Viewer {
 			} catch (NullReferenceException) { }
 		}
 
+		private void UpdateColorElements() {
+			try {
+				Color1Rectangle.Fill = new SolidColorBrush(Model.Save.Color1);
+				Color2Rectangle.Fill = new SolidColorBrush(Model.Save.Color2);
+				Color3Rectangle.Fill = new SolidColorBrush(Model.Save.Color3);
+			} catch (NullReferenceException) { }
+		}
+
 		private void XPSliderValueChange(object sender, RoutedPropertyChangedEventArgs<double> e) {
 			UpdateXPEditElements();
+		}
+
+		private void Color1Rectangle_MouseDown(object sender, MouseButtonEventArgs e) {
+
+		}
+
+		private void Color2Rectangle_MouseDown(object sender, MouseButtonEventArgs e) {
+
+		}
+
+		private void Color3Rectangle_MouseDown(object sender, MouseButtonEventArgs e) {
+
 		}
 	}
 }

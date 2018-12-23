@@ -20,10 +20,10 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="3*"/>
 			<ColumnDefinition Width="2*"/>
-			<ColumnDefinition Width="1*"/>
 			<ColumnDefinition Width="4*"/>
-			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="3*"/>
 			<ColumnDefinition Width="4*"/>
 		</Grid.ColumnDefinitions>
 

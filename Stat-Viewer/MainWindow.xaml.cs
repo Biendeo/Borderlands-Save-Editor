@@ -37,6 +37,7 @@ namespace Stat_Viewer {
 			SaveWatcher = null;
 
 			EditMode = false;
+			Title = ViewModeTitle;
 			CurrentFolder = null;
 			CurrentFileName = null;
 
@@ -162,14 +163,19 @@ namespace Stat_Viewer {
 			CharacterViewControl.Visibility = Visibility.Collapsed;
 			ProficiencyEditControl.Visibility = Visibility.Visible;
 			ProficiencyViewControl.Visibility = Visibility.Collapsed;
+
+			Title = EditModeTitle;
 		}
 
 		private void EditModeUnchecked(object sender, RoutedEventArgs e) {
 			EditMode = false;
+
 			CharacterEditControl.Visibility = Visibility.Collapsed;
 			CharacterViewControl.Visibility = Visibility.Visible;
 			ProficiencyEditControl.Visibility = Visibility.Collapsed;
 			ProficiencyViewControl.Visibility = Visibility.Visible;
+
+			Title = ViewModeTitle;
 		}
 	}
 }

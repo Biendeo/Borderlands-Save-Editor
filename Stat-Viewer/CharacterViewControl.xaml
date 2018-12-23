@@ -55,5 +55,22 @@
 			<TextBlock Text="{Binding ElementName=TotalXPProgressBar, Path=Value, StringFormat={}{0:0.0000}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 		</Grid>
 
+		<Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Color 1:" Grid.Column="0"/>
+			<Rectangle Name="Color1Rectangle" Fill="Black" Width="25" Grid.Column="1"/>
+			<Label Content="Color 2:" Grid.Column="2"/>
+			<Rectangle Name="Color2Rectangle" Fill="Black" Width="25" Grid.Column="3"/>
+			<Label Content="Color 3:" Grid.Column="4"/>
+			<Rectangle Name="Color3Rectangle" Fill="Black" Width="25" Grid.Column="5"/>
+		</Grid>
+
 	</Grid>
 </UserControl>
