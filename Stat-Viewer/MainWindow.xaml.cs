@@ -68,10 +68,13 @@ namespace Stat_Viewer {
 			if (!EditMode) {
 				while (true) {
 					try {
-						Model.Save = Save.Read(CurrentFolder + CurrentFileName);
+						var save = Save.Read(Path.Combine(CurrentFolder, CurrentFileName));
+						Dispatcher.Invoke(() => {
+							Model.Save = save;
+						});
 						break;
-					} catch {
-
+					} catch (Exception exc) {
+						Console.Error.WriteLine(exc);
 					}
 				}
 				UpdateAllElements();
@@ -79,12 +82,14 @@ namespace Stat_Viewer {
 		}
 
 		public void UpdateAllElements() {
-			CharacterEditControl.UpdateAllElements();
-			CharacterViewControl.UpdateAllElements();
-			ProficiencyEditControl.UpdateAllElements();
-			ProficiencyViewControl.UpdateAllElements();
-			PlaythroughsViewControl.UpdateAllElements();
-			ChallengesViewControl.UpdateAllElements();
+			Dispatcher.Invoke(() => {
+				CharacterEditControl.UpdateAllElements();
+				CharacterViewControl.UpdateAllElements();
+				ProficiencyEditControl.UpdateAllElements();
+				ProficiencyViewControl.UpdateAllElements();
+				PlaythroughsViewControl.UpdateAllElements();
+				ChallengesViewControl.UpdateAllElements();
+			});
 		}
 
 		private void CommandAlwaysEnabled(object sender, CanExecuteRoutedEventArgs e) {
