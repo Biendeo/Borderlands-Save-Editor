@@ -83,6 +83,7 @@ namespace Stat_Viewer {
 			CharacterViewControl.UpdateAllElements();
 			ProficiencyEditControl.UpdateAllElements();
 			ProficiencyViewControl.UpdateAllElements();
+			PlaythroughsViewControl.UpdateAllElements();
 		}
 
 		private void CommandAlwaysEnabled(object sender, CanExecuteRoutedEventArgs e) {

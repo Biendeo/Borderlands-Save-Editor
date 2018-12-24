@@ -105,6 +105,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlaythroughsViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProficiencyEditControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model.cs" />
+    <Compile Include="PlaythroughsViewControl.xaml.cs">
+      <DependentUpon>PlaythroughsViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProficiencyEditControl.xaml.cs">
       <DependentUpon>ProficiencyEditControl.xaml</DependentUpon>
     </Compile>

@@ -41,5 +41,15 @@ namespace Borderlands_Save_Editor {
 		public Playthrough() {
 			Missions = new List<Mission>();
 		}
+
+		/// <summary>
+		/// Returns the total number of missions completed on this playthrough.
+		/// </summary>
+		public Int32 MissionsCompleted { get { return Missions.Sum(m => m.Status == Mission.MissionStatus.Completed ? 1 : 0); } }
+
+		/// <summary>
+		/// The total number of missions in the game.
+		/// </summary>
+		public const Int32 TotalMissions = 216;
 	}
 }

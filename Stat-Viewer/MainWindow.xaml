@@ -75,7 +75,10 @@
 				<Grid/>
 			</TabItem>
 			<TabItem Header="Playthroughs">
-				<Grid/>
+				<StackPanel>
+					<!--<local:PlaythroughsEditControl x:Name="PlaythroughsEditControl" Visibility="Collapsed"/>-->
+					<local:PlaythroughsViewControl x:Name="PlaythroughsViewControl" Visibility="Visible"/>
+				</StackPanel>
 			</TabItem>
 		</TabControl>
 	</Grid>
