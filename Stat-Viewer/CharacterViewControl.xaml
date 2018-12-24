@@ -26,6 +26,22 @@
 		<Label Content="Name:" Grid.Row="0" Grid.Column="0"/>
 		<Label Name="CharacterNameLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="{Binding Save.Name}" HorizontalAlignment="Stretch"/>
 
+		<Grid Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="85"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Class:" Grid.Row="0" Grid.Column="0"/>
+			<Label Name="ClassLabel" Grid.Row="0" Grid.Column="1" Content="{Binding Save.Details.ClassType}" HorizontalAlignment="Stretch"/>
+			<Label Content="Money:" Grid.Row="0" Grid.Column="2"/>
+			<Label Name="MoneyLabel" Grid.Row="0" Grid.Column="3" Content="{Binding Save.Details.Money}" HorizontalAlignment="Stretch"/>
+		</Grid>
+
 		<Grid Grid.Row="0" Grid.Column="6">
 			<Grid.RowDefinitions>
 				<RowDefinition/>

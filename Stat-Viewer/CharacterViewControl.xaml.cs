@@ -36,6 +36,8 @@ namespace Stat_Viewer {
 		private void UpdateLabelContent() {
 			try {
 				CharacterNameLabel.Content = Model.Save.Name;
+				ClassLabel.Content = Model.Save.Details.ClassType.ClassName();
+				MoneyLabel.Content = $"${Model.Save.Details.Money}";
 				SaveNumberLabel.Content = Model.Save.SaveNumber.ToString();
 			} catch (NullReferenceException) { }
 		}

@@ -22,6 +22,7 @@ namespace Stat_Viewer {
 	public partial class CharacterEditControl : UserControl {
 		public CharacterEditControl() {
 			InitializeComponent();
+			ClassComboBox.ItemsSource = Enum.GetValues(typeof(CharacterClassType));
 		}
 
 		internal Model Model {
@@ -37,6 +38,8 @@ namespace Stat_Viewer {
 		private void UpdateTextBoxElements() {
 			try {
 				CharacterNameTextBox.Text = Model.Save.Name;
+				ClassComboBox.SelectedItem = Model.Save.Details.ClassType;
+				MoneyTextBox.Text = Model.Save.Details.Money.ToString();
 				SaveNumberTextBox.Text = Model.Save.SaveNumber.ToString();
 			} catch (NullReferenceException) { }
 		}

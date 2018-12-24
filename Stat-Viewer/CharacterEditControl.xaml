@@ -27,6 +27,22 @@
 			<TextBox Name="CharacterNameTextBox" Width="Auto" Text="{Binding Save.Name}" MaxWidth="{Binding ElementName=CharacterNameScrollViewer, Path=ActualWidth}" HorizontalAlignment="Stretch"/>
 		</ScrollViewer>
 
+		<Grid Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="85"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Class:" Grid.Row="0" Grid.Column="0"/>
+			<ComboBox Name="ClassComboBox" Grid.Row="0" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch"/>
+			<Label Content="Money:" Grid.Row="0" Grid.Column="2"/>
+			<TextBox Name="MoneyTextBox" Grid.Row="0" Grid.Column="3" Width="Auto" Text="{Binding Save.Details.Money}" MaxLength="12" HorizontalAlignment="Stretch"/>
+		</Grid>
+
 		<Grid Grid.Row="0" Grid.Column="6">
 			<Grid.RowDefinitions>
 				<RowDefinition/>
