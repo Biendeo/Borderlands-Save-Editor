@@ -80,6 +80,12 @@
 					<local:PlaythroughsViewControl x:Name="PlaythroughsViewControl" Visibility="Visible"/>
 				</StackPanel>
 			</TabItem>
+			<TabItem Header="Challenges">
+				<StackPanel>
+					<!--<local:ChallengesEditControl x:Name="ChallengesEditControl" Visibility="Collapsed"/>-->
+					<local:ChallengesViewControl x:Name="ChallengesViewControl" Visibility="Visible"/>
+				</StackPanel>
+			</TabItem>
 		</TabControl>
 	</Grid>
 </Window>

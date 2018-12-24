@@ -296,7 +296,7 @@ namespace Borderlands_Save_Editor {
 			{ 85, StatID.ShotsFired },
 			{ 86, StatID.Unknown86 },
 			{ 87, StatID.Unknown87 },
-			{ 88, StatID.Unknown88 },
+			{ 88, StatID.DuelsWon }, //? I've chucked duels here, but that's not where they are.
 			{ 89, StatID.Unknown89 },
 			{ 90, StatID.Unknown90 },
 			{ 91, StatID.Unknown91 },
