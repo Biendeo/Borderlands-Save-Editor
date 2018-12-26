@@ -50,47 +50,50 @@ namespace Stat_Viewer {
 			QuestGrid.Children.Clear();
 			QuestGrid.RowDefinitions.Clear();
 
-			var seenQuests = new HashSet<string>();
-			foreach (var playthrough in Model.Save.Playthroughs) {
-				foreach (var mission in playthrough.Missions) {
-					seenQuests.Add(mission.InternalName);
+			var seenQuests = new List<Tuple<Mission, Mission>>();
+
+			foreach (MissionID id in Enum.GetValues(typeof(MissionID))) {
+				seenQuests.Add(new Tuple<Mission, Mission>(Model.Save.Playthroughs[0].Missions[id], Model.Save.Playthroughs[1].Missions[id]));
+			}
+
+			int p(Tuple<Mission, Mission> a, Tuple<Mission, Mission> b) {
+				if (a.Item1.Status == b.Item1.Status && a.Item2.Status == b.Item2.Status) {
+					return a.Item1.ID.CompareTo(b.Item1.ID);
+				} else if (a.Item1.Status == b.Item1.Status) {
+					int x = a.Item2.Status == Mission.MissionStatus.Completed ? -1 : (int)a.Item2.Status;
+					int y = b.Item2.Status == Mission.MissionStatus.Completed ? -1 : (int)b.Item2.Status;
+					return y - x;
+				} else {
+					int x = a.Item1.Status == Mission.MissionStatus.Completed ? -1 : (int)a.Item1.Status;
+					int y = b.Item1.Status == Mission.MissionStatus.Completed ? -1 : (int)b.Item1.Status;
+					return y - x;
 				}
 			}
 
-			foreach (string questName in seenQuests) {
+			seenQuests.Sort(p);
+
+			foreach (var mission in seenQuests) {
 				QuestGrid.RowDefinitions.Add(new RowDefinition());
 
 				var questLabel = new Label {
-					Content = questName,
+					Content = mission.Item1.ReadableName,
 					HorizontalAlignment = HorizontalAlignment.Right
 				};
 				QuestGrid.Children.Add(questLabel);
 				Grid.SetRow(questLabel, QuestGrid.RowDefinitions.Count - 1);
 				Grid.SetColumn(questLabel, 0);
 
-				string playthrough1Text = "Not found";
-				var playthrough1 = Model.Save.Playthroughs[0].Missions.Find(m => m.InternalName == questName);
-				if (playthrough1 != null) {
-					playthrough1Text = playthrough1.Status.ToString();
-				}
-
 				var playthrough1Label = new Label {
-					Content = playthrough1Text,
-					HorizontalAlignment = HorizontalAlignment.Center
+					Content = mission.Item1.Status.ToString(),
+					HorizontalAlignment = HorizontalAlignment.Right
 				};
 				QuestGrid.Children.Add(playthrough1Label);
 				Grid.SetRow(playthrough1Label, QuestGrid.RowDefinitions.Count - 1);
 				Grid.SetColumn(playthrough1Label, 1);
 
-				string playthrough2Text = "Not found";
-				var playthrough2 = Model.Save.Playthroughs[1].Missions.Find(m => m.InternalName == questName);
-				if (playthrough2 != null) {
-					playthrough2Text = playthrough1.Status.ToString();
-				}
-
 				var playthrough2Label = new Label {
-					Content = playthrough2Text,
-					HorizontalAlignment = HorizontalAlignment.Center
+					Content = mission.Item2.Status.ToString(),
+					HorizontalAlignment = HorizontalAlignment.Right
 				};
 				QuestGrid.Children.Add(playthrough2Label);
 				Grid.SetRow(playthrough2Label, QuestGrid.RowDefinitions.Count - 1);

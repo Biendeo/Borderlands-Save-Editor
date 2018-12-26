@@ -28,24 +28,36 @@ namespace Borderlands_Save_Editor {
 		/// <summary>
 		/// The active mission object.
 		/// </summary>
-		public Mission ActiveMission { get { return Missions.Find(x => x.InternalName == ActiveMissionName); } }
+		public Mission ActiveMission { get { return Missions.First(x => x.Value.InternalName == ActiveMissionName).Value; } }
 
 		/// <summary>
 		/// A list of all missions associated with this playthrough.
 		/// </summary>
-		public List<Mission> Missions;
+		public Dictionary<MissionID, Mission> Missions;
 
 		/// <summary>
 		/// Constructs a new playthrough without any missions logged.
 		/// </summary>
 		public Playthrough() {
-			Missions = new List<Mission>();
+			Missions = new Dictionary<MissionID, Mission>();
+			foreach (MissionID id in Enum.GetValues(typeof(MissionID))) {
+				var newMission = new Mission {
+					ID = id,
+					Status = Mission.MissionStatus.Unknown
+				};
+				Missions.Add(id, newMission);
+			}
 		}
 
 		/// <summary>
 		/// Returns the total number of missions completed on this playthrough.
 		/// </summary>
-		public Int32 MissionsCompleted { get { return Missions.Sum(m => m.Status == Mission.MissionStatus.Completed ? 1 : 0); } }
+		public Int32 MissionsCompleted { get { return Missions.Sum(m => m.Value.Status == Mission.MissionStatus.Completed ? 1 : 0); } }
+
+		/// <summary>
+		/// Returns the total number of missions seen on this playthrough (i.e. not unknown).
+		/// </summary>
+		public Int32 FoundMissionsCount { get { return Missions.Sum(m => m.Value.Status != Mission.MissionStatus.Unknown ? 1 : 0); } }
 
 		/// <summary>
 		/// The total number of missions in the game.

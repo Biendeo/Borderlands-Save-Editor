@@ -147,12 +147,12 @@ namespace Borderlands_Save_Editor.Save {
 				playthrough.ActiveMissionName = reader.BL_ReadString();
 				Int32 missionCount = reader.ReadInt32();
 				for (Int32 y = 0; y < missionCount; ++y) {
-					Mission mission = new Mission();
-					playthrough.Missions.Add(mission);
-					mission.InternalName = reader.BL_ReadString();
-					mission.MissionStatusFlag = reader.ReadInt32();
-					mission.UnknownVariable2 = reader.ReadInt32();
-					mission.UnknownVariable3 = reader.ReadInt32();
+					Mission mission = new Mission {
+						InternalName = reader.BL_ReadString(),
+						MissionStatusFlag = reader.ReadInt32(),
+						UnknownVariable2 = reader.ReadInt32(),
+						UnknownVariable3 = reader.ReadInt32()
+					};
 					Int32 detailsCount = reader.ReadInt32();
 					for (Int32 z = 0; z < detailsCount; ++z) {
 						Mission.MissionDetails detail = new Mission.MissionDetails();
@@ -160,6 +160,7 @@ namespace Borderlands_Save_Editor.Save {
 						detail.UnknownString = reader.BL_ReadString();
 						detail.UnknownVariable = reader.ReadInt32();
 					}
+					playthrough.Missions[mission.ID] = mission;
 				}
 			}
 
@@ -377,16 +378,18 @@ namespace Borderlands_Save_Editor.Save {
 			foreach (var playthrough in Playthroughs) {
 				writer.Write(playthrough.Number);
 				writer.BL_WriteString(playthrough.ActiveMissionName);
-				writer.Write(playthrough.Missions.Count);
+				writer.Write(playthrough.FoundMissionsCount);
 				foreach (var mission in playthrough.Missions) {
-					writer.BL_WriteString(mission.InternalName);
-					writer.Write(mission.MissionStatusFlag);
-					writer.Write(mission.UnknownVariable2);
-					writer.Write(mission.UnknownVariable3);
-					writer.Write(mission.Details.Count);
-					foreach (var detail in mission.Details) {
-						writer.BL_WriteString(detail.UnknownString);
-						writer.Write(detail.UnknownVariable);
+					if (mission.Value.Status != Mission.MissionStatus.Unknown) {
+						writer.BL_WriteString(mission.Value.InternalName);
+						writer.Write(mission.Value.MissionStatusFlag);
+						writer.Write(mission.Value.UnknownVariable2);
+						writer.Write(mission.Value.UnknownVariable3);
+						writer.Write(mission.Value.Details.Count);
+						foreach (var detail in mission.Value.Details) {
+							writer.BL_WriteString(detail.UnknownString);
+							writer.Write(detail.UnknownVariable);
+						}
 					}
 				}
 			}

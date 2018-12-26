@@ -119,6 +119,9 @@ namespace Stat_Viewer {
 				Model.Save = Save.Read(openDialog.FileName);
 				SetupSaveWatcher(new FileInfo(openDialog.FileName).DirectoryName, openDialog.SafeFileName);
 				UpdateAllElements();
+				foreach (var mission in Model.Save.Playthroughs[0].Missions) {
+					Console.WriteLine(mission.Value.InternalName);
+				}
 			}
 		}
 
