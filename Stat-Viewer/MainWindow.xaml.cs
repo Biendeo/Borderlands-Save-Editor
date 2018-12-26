@@ -73,7 +73,10 @@ namespace Stat_Viewer {
 							Model.Save = save;
 						});
 						break;
+					} catch (IOException exc) {
+						Console.Error.WriteLine(exc);
 					} catch (Exception exc) {
+						MessageBox.Show(exc.ToString());
 						Console.Error.WriteLine(exc);
 					}
 				}
